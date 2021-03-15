@@ -16,7 +16,7 @@
 
 -   [x] [요구사항 정리](./planner/requirements.md) - 2021.03.15
 -   [x] [DB 설계](./planner/er-diagram.md) - 2021.03.15
--   [ ] 와이어 프레임 작성
+-   [ ] [와이어 프레임 작성](./planner/wireframe.md)
 
 ## 커밋 규칙
 
