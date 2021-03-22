@@ -5,31 +5,37 @@ import Home from "./routes/Home";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Search from "./routes/Search";
+import styled from "./app.module.css";
+import Shop from "./routes/Shop";
 
 const App = () => {
     return (
         <Router>
-            <header>
+            <header className={styled.header}>
                 <Link to="/">
                     {" "}
                     <h1>TITLE</h1>{" "}
                 </Link>
-                <Link to="/search">
-                    {" "}
-                    <h3>검색</h3>
-                </Link>
-                <Link to="/cart">
-                    {" "}
-                    <h3>장바구니</h3>
-                </Link>
-                <Link to="/login">
-                    {" "}
-                    <h3>로그인</h3>
-                </Link>
+
+                <ul className={styled.menu}>
+                    <li>
+                        <Link to="/search"> 검색</Link>
+                    </li>
+                    <li>
+                        <Link to="/shop">SHOP</Link>
+                    </li>
+                    <li>
+                        <Link to="/cart"> 장바구니</Link>
+                    </li>
+                    <li>
+                        <Link to="/login">로그인</Link>
+                    </li>
+                </ul>
             </header>
             <main>
                 <Route path="/" exact component={Home} />
                 <Route path="/search" component={Search} />
+                <Route path="/shop" component={Shop} />
                 <Route path="/cart" component={Cart} />
                 <Route path="/login" component={Login} />
                 <Route path="/register" component={Register} />
