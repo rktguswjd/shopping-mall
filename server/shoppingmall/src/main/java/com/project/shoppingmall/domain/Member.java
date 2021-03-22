@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
+@Builder
 @Table(name = "members")
 public class Member {
     @Id
