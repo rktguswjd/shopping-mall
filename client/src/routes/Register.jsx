@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actionCreators } from "../store/store";
 
-const Register = (props) => {
+const Register = ({ history }) => {
+    console.log(history);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
     const [address, setAddress] = useState("");
+    const dispatch = useDispatch();
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -15,14 +19,15 @@ const Register = (props) => {
             console.log("비밀번호 다름");
             return;
         }
-        console.log({
+        let data = {
             email,
             password,
-            passwordCheck,
             name,
             phone,
             address,
-        });
+        };
+        dispatch(actionCreators.signUp(data));
+        history.push("/login");
     };
     const onChangeEmail = (e) => {
         setEmail(e.target.value);
@@ -91,3 +96,15 @@ const Register = (props) => {
 };
 
 export default Register;
+
+// const mapStateToProps = (state) => {
+//     return { user: state };
+// };
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         signUp: (data) => dispatch(actionCreators.signUp(data)),
+//     };
+// };
+
+// export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
