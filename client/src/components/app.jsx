@@ -1,25 +1,42 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Route, Link } from "react-router-dom";
-import Cart from "./routes/Cart";
-import Home from "./routes/Home";
-import Search from "./routes/Search";
+import Cart from "../routes/Cart";
+import Home from "../routes/Home";
+import Search from "../routes/Search";
 import styled from "./app.module.css";
-import Shop from "./routes/Shop";
-import LogIn from "./routes/LogIn";
-import Register from "./routes/Register";
+import Shop from "../routes/Shop";
+import LogIn from "../routes/LogIn";
+import Register from "../routes/Register";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    console.log(isLoggedIn);
+    const [navToggleOpen, setNavToggleOpen] = useState(false);
+
     return (
         <Router>
-            <header className={styled.header}>
+            <header className={styled.nav}>
                 <Link to="/">
                     {" "}
                     <h1>TITLE</h1>{" "}
                 </Link>
 
-                <ul className={styled.menu}>
+                <button
+                    className={styled.nav_toggle_btn}
+                    onClick={() => setNavToggleOpen(!navToggleOpen)}
+                >
+                    {navToggleOpen ? (
+                        <FontAwesomeIcon icon={faTimes} />
+                    ) : (
+                        <FontAwesomeIcon icon={faBars} />
+                    )}
+                </button>
+                <ul
+                    className={
+                        navToggleOpen ? styled.nav_menu_open : styled.nav_menu
+                    }
+                >
                     <li>
                         <Link to="/search"> 검색</Link>
                     </li>
