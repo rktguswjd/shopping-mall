@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 
-const Login = (props) => {
-    const onSubmit = (event) => {
-        event.preventDefault();
-        console.log(event);
-    };
+const LogIn = ({ setIsLoggedIn }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const onChangeEmail = useCallback((e) => {
+        setEmail(e.target.value);
+    }, []);
+
+    const onChangePassword = useCallback((e) => {
+        setPassword(e.target.value);
+    }, []);
+
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            setIsLoggedIn(true);
+            console.log(email, password);
+        },
+        [email, password]
+    );
     return (
         <>
             <h1>로그인</h1>
             <form onSubmit={onSubmit}>
-                <input type="text" placeholder="e-mail" />
-                <input type="password" placeholder="password" />
+                <input
+                    type="text"
+                    placeholder="e-mail"
+                    onChange={onChangeEmail}
+                />
+                <input
+                    type="password"
+                    placeholder="password"
+                    onChange={onChangePassword}
+                />
                 <button>로그인</button>
             </form>
             아직 계정이 없나요? <Link to="/register">가입하기</Link>
@@ -19,4 +42,4 @@ const Login = (props) => {
     );
 };
 
-export default Login;
+export default LogIn;
