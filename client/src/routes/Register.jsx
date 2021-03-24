@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { actionCreators } from "../store/store";
+import { actionCreators } from "../reducers/user";
 
 const Register = ({ history }) => {
     console.log(history);
@@ -26,7 +26,7 @@ const Register = ({ history }) => {
             phone,
             address,
         };
-        dispatch(actionCreators.signUp(data));
+        dispatch(actionCreators.register(data));
         history.push("/login");
     };
     const onChangeEmail = (e) => {

@@ -1,9 +1,12 @@
 import React, { useCallback, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { actionCreators } from "../reducers/user";
 
 const LogIn = ({ setIsLoggedIn }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
     const onChangeEmail = useCallback((e) => {
         setEmail(e.target.value);
@@ -16,6 +19,8 @@ const LogIn = ({ setIsLoggedIn }) => {
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
+
+            dispatch(actionCreators.login({ email, password }));
             setIsLoggedIn(true);
             console.log(email, password);
         },
@@ -26,7 +31,7 @@ const LogIn = ({ setIsLoggedIn }) => {
             <h1>로그인</h1>
             <form onSubmit={onSubmit}>
                 <input
-                    type="text"
+                    type="email"
                     placeholder="e-mail"
                     onChange={onChangeEmail}
                 />
