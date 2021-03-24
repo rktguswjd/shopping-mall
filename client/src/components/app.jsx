@@ -55,7 +55,7 @@ const App = () => {
                     </li>
                 </ul>
             </header>
-            <main>
+            <main className={styled.main}>
                 <Route path="/" exact component={Home} />
                 <Route path="/search" component={Search} />
                 <Route path="/shop" component={Shop} />

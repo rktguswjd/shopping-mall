@@ -1,0 +1,28 @@
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (max-width: 768px) {
+    .tabs {
+        flex-direction: column;
+        font-size: 1rem;
+        margin: 2rem 0;
+    }
+
+    li {
+        padding: 0 0.8rem;
+        margin: 0.2rem 0;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+        margin-bottom: 2rem;
+    }
+}

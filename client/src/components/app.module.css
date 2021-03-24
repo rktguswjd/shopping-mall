@@ -5,8 +5,11 @@ a {
 
 .nav {
     display: flex;
+    position: fixed;
+    z-index: 2;
     justify-content: space-between;
     padding: 2rem 3rem;
+    width: 90%;
 }
 
 .nav_toggle_btn {
@@ -34,6 +37,14 @@ li {
     padding: 0 0.8rem;
 }
 
+.main {
+    width: 90%;
+    max-width: 1500px;
+    padding: 10rem 0;
+    margin: auto;
+    text-align: center;
+}
+
 @media screen and (max-width: 768px) {
     .nav {
         padding: 0.75rem 2rem;
@@ -42,7 +53,7 @@ li {
     }
 
     a {
-        color: white;
+        color: red;
     }
 
     .nav_toggle_btn {
@@ -66,5 +77,11 @@ li {
 
     li {
         margin: 1rem 0;
+    }
+
+    .main {
+        padding: 6rem 1rem;
+        margin: auto;
+        position: relative;
     }
 }
