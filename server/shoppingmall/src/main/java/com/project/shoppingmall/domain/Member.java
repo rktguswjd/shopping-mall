@@ -8,6 +8,8 @@ import javax.persistence.*;
 @Entity
 @Getter @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "members")
 public class Member {
     @Id
@@ -26,7 +28,6 @@ public class Member {
     public enum Role{
         CLIENT, ADMIN, DELETED
     }
-
 
 
     /**
