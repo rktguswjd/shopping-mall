@@ -6,10 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class MemberServiceImplTest {
 
@@ -39,5 +41,28 @@ class MemberServiceImplTest {
             memberService.register(memberDto);
             memberService.register(memberDto);
         });
+    }
+
+    @Test
+    void 로그인성공() {
+        MemberDto memberDto = new MemberDto();
+        memberDto.setEmail("wonseok");
+        memberDto.setName("최원석");
+        memberDto.setPassword("1234");
+        memberDto.setPhone("0104123");
+        memberDto.setLocation("노원구");
+        memberService.register(memberDto);
+        assertNotNull(memberService.login("wonseok", "1234").get());
+    }
+    @Test
+    void 로그인실패() {
+        MemberDto memberDto = new MemberDto();
+        memberDto.setEmail("wonseok");
+        memberDto.setName("최원석");
+        memberDto.setPassword("12344");
+        memberDto.setPhone("0104123");
+        memberDto.setLocation("노원구");
+        memberService.register(memberDto);
+        assertTrue(memberService.login("wonseok", "1234").isEmpty());
     }
 }

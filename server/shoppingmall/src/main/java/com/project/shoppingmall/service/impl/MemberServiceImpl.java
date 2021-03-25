@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -24,8 +27,10 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Transactional
-    public Member login(String email, String password) {
-        return null;
+    public Optional<Member> login(String email, String password) {
+        Member member = memberRepository.findByEmail(email).orElseThrow(() -> new NoSuchElementException(email));
+        if(member.getPassword().equals(password)) return Optional.of(member);
+        return Optional.empty();
     }
 
     public boolean isDuplicatedEmail(String email) {
