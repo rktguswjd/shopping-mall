@@ -2,7 +2,7 @@ package com.project.shoppingmall.service.impl;
 
 import com.project.shoppingmall.controller.dto.MemberDto;
 import com.project.shoppingmall.domain.Member;
-import com.project.shoppingmall.exception.DuplicationIdException;
+import com.project.shoppingmall.exception.DuplicationEmailException;
 import com.project.shoppingmall.repository.MemberRepository;
 import com.project.shoppingmall.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -18,18 +18,17 @@ public class MemberServiceImpl implements MemberService {
 
     @Transactional
     public void register(MemberDto memberDto) {
-        if (isDuplicatedId(memberDto.getEmail())) throw new DuplicationIdException(memberDto.getEmail());
+        if (isDuplicatedEmail(memberDto.getEmail())) throw new DuplicationEmailException(memberDto.getEmail());
         Member createdMember = Member.register(memberDto);
         memberRepository.save(createdMember);
     }
 
     @Transactional
-    public Member login(String id, String password) {
+    public Member login(String email, String password) {
         return null;
     }
 
-    public boolean isDuplicatedId(String id) {
-
-        return false;
+    public boolean isDuplicatedEmail(String email) {
+        return memberRepository.countByEmail(email) == 1;
     }
 }

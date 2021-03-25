@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public interface MemberService {
     void register(MemberDto memberDto);
 
-    Member login(String id, String password);
+    Member login(String email, String password);
 
-    boolean isDuplicatedId(String id);
+    boolean isDuplicatedEmail(String email);
 }
