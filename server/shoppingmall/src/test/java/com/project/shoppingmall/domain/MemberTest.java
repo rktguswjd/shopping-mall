@@ -25,6 +25,7 @@ class MemberTest {
                 .email("wonsok@naver.com")
                 .password("1234")
                 .phone("01041105893")
+                .location("노원구")
                 .build();
         em.persist(member);
     }

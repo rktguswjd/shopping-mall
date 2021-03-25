@@ -16,7 +16,12 @@ public class Member {
     private String email;
     private String password;
     private String phone;
+    private String location;
+    
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-//    @Enumerated(EnumType.STRING)
-//    private Role role;
+    public enum Role{
+        CLIENT, ADMIN, DELETED
+    }
 }
