@@ -1,3 +1,8 @@
+.wrapper {
+    position: relative;
+    min-height: 100vh;
+}
+
 a {
     text-decoration: none !important;
     color: black;
@@ -9,7 +14,11 @@ a {
     z-index: 2;
     justify-content: space-between;
     padding: 2rem 3rem;
-    width: 90%;
+    width: 100%;
+}
+
+.title {
+    font-size: 2rem;
 }
 
 .nav_toggle_btn {
@@ -38,7 +47,7 @@ li {
 }
 
 .main {
-    width: 90%;
+    width: 100%;
     max-width: 1500px;
     padding: 10rem 0;
     margin: auto;
