@@ -20,38 +20,6 @@ public class ShoppingmallApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ShoppingmallApplication.class, args);
 	}
-	@Bean
-	public CommandLineRunner commandLineRunner() {
-		return new CommandLineRunner() {
-			@Override
-			public void run(String... args) throws Exception {
-				System.out.println("CommandLineRunner");
-			}
-		};
-	}
 
-	@Bean
-	public ApplicationRunner applicationRunner() {
-		return new ApplicationRunner() {
-			@Override
-			public void run(ApplicationArguments args) throws Exception {
-				System.out.println("ApplicationRunner");
-			}
-		};
-	}
-	@EventListener(ApplicationReadyEvent.class)
-	public void eventListener1() {
-		System.out.println("Ready EventListener");
-	}
-	@EventListener(ApplicationStartedEvent.class)
-	public void eventListener2() {
-		System.out.println("Started EventListener");
-	}
-
-
-	@PostConstruct
-	public void init(){
-		System.out.println("PostConstruct");
-	}
 }
 
