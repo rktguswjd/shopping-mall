@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { actionCreators } from "../reducers/user";
+import { registerRequestAction } from "../reducers/user";
 
 const Register = ({ history }) => {
     console.log(history);
@@ -26,7 +26,7 @@ const Register = ({ history }) => {
             phone,
             address,
         };
-        dispatch(actionCreators.register(data));
+        dispatch(registerRequestAction(data));
         history.push("/login");
     };
     const onChangeEmail = (e) => {
