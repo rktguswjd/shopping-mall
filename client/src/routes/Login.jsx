@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { actionCreators } from "../reducers/user";
+import { loginRequestAction } from "../reducers/user";
 
 const LogIn = ({ setIsLoggedIn }) => {
     const [email, setEmail] = useState("");
@@ -20,7 +20,7 @@ const LogIn = ({ setIsLoggedIn }) => {
         (e) => {
             e.preventDefault();
 
-            dispatch(actionCreators.login({ email, password }));
+            dispatch(loginRequestAction(email, password));
             setIsLoggedIn(true);
             console.log(email, password);
         },

@@ -9,65 +9,75 @@ import LogIn from "../routes/LogIn";
 import Register from "../routes/Register";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ProductDetail from "../routes/ProductDetail";
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [navToggleOpen, setNavToggleOpen] = useState(false);
 
     return (
-        <Router>
-            <header className={styled.nav}>
-                <Link to="/">
-                    {" "}
-                    <h1>TITLE</h1>{" "}
-                </Link>
+        <div className={styled.wrapper}>
+            <Router>
+                <header className={styled.nav}>
+                    <Link className={styled.title} to="/">
+                        TITLE
+                    </Link>
 
-                <button
-                    className={styled.nav_toggle_btn}
-                    onClick={() => setNavToggleOpen(!navToggleOpen)}
-                >
-                    {navToggleOpen ? (
-                        <FontAwesomeIcon icon={faTimes} />
-                    ) : (
-                        <FontAwesomeIcon icon={faBars} />
-                    )}
-                </button>
-                <ul
-                    className={
-                        navToggleOpen ? styled.nav_menu_open : styled.nav_menu
-                    }
-                >
-                    <li>
-                        <Link to="/search"> 검색</Link>
-                    </li>
-                    <li>
-                        <Link to="/shop">SHOP</Link>
-                    </li>
-                    <li>
-                        <Link to="/cart"> 장바구니</Link>
-                    </li>
-                    <li>
-                        {isLoggedIn ? (
-                            <Link to="/logout">로그아웃</Link>
+                    <button
+                        className={styled.nav_toggle_btn}
+                        onClick={() => setNavToggleOpen(!navToggleOpen)}
+                    >
+                        {navToggleOpen ? (
+                            <FontAwesomeIcon icon={faTimes} />
                         ) : (
-                            <Link to="/login">로그인</Link>
+                            <FontAwesomeIcon icon={faBars} />
                         )}
-                    </li>
-                </ul>
-            </header>
-            <main className={styled.main}>
-                <Route path="/" exact component={Home} />
-                <Route path="/search" component={Search} />
-                <Route path="/shop" component={Shop} />
-                <Route path="/cart" component={Cart} />
-                <Route
-                    path="/login"
-                    render={() => <LogIn setIsLoggedIn={setIsLoggedIn} />}
-                />
-                <Route path="/register" component={Register} />
-            </main>
-            <footer />
-        </Router>
+                    </button>
+                    <ul
+                        className={
+                            navToggleOpen
+                                ? styled.nav_menu_open
+                                : styled.nav_menu
+                        }
+                    >
+                        <li>
+                            <Link to="/search"> 검색</Link>
+                        </li>
+                        <li>
+                            <Link to="/shop">SHOP</Link>
+                        </li>
+                        <li>
+                            <Link to="/cart"> 장바구니</Link>
+                        </li>
+                        <li>
+                            {isLoggedIn ? (
+                                <Link to="/logout">로그아웃</Link>
+                            ) : (
+                                <Link to="/login">로그인</Link>
+                            )}
+                        </li>
+                    </ul>
+                </header>
+                <main className={styled.main}>
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/search" component={Search} />
+                    <Route exact path="/shop" component={Shop} />
+                    <Route exact path="/cart" component={Cart} />
+                    <Route
+                        exact
+                        path="/login"
+                        render={() => <LogIn setIsLoggedIn={setIsLoggedIn} />}
+                    />
+                    <Route exact path="/register" component={Register} />
+                    <Route
+                        exact
+                        path="/shop/product/productId"
+                        component={ProductDetail}
+                    />
+                </main>
+                <footer />
+            </Router>
+        </div>
     );
 };
 
