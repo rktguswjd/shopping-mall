@@ -2,6 +2,15 @@
     display: flex;
     justify-content: center;
     margin-bottom: 1rem;
+    font-family: "Spectral", serif;
+}
+
+.tabs a {
+    color: black;
+}
+
+.tabs_category {
+    margin-right: 1rem;
 }
 
 .products {
@@ -9,16 +18,21 @@
     grid-template-columns: repeat(3, 1fr);
 }
 
+.products a {
+    color: black;
+}
+
 @media screen and (max-width: 768px) {
     .tabs {
         flex-direction: column;
         font-size: 1rem;
-        margin: 2rem 0;
+        margin: 1rem 0;
     }
 
-    li {
+    .tabs_category {
         padding: 0 0.8rem;
         margin: 0.2rem 0;
+        color: black;
     }
 
     .products {
