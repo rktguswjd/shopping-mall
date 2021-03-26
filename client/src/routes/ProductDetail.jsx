@@ -18,7 +18,7 @@ const ProductDetail = (props) => {
                     <div>수량</div>
 
                     <button className={styled.btn}>ADD TO CART</button>
-                    <button className={styled.btn}>BUYNOW</button>
+                    <button className={styled.btn}>BUY NOW</button>
                 </div>
             </div>
             <div className={styled.productDescription}>
