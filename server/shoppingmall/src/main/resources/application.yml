@@ -6,10 +6,11 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
+  jwt:
+    secret: wonseok
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
       properties:
         hibernate:
           #show_sql: false
