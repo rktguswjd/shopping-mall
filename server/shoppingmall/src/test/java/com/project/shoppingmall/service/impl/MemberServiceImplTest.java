@@ -1,6 +1,6 @@
 package com.project.shoppingmall.service.impl;
 
-import com.project.shoppingmall.controller.dto.MemberDto;
+import com.project.shoppingmall.controller.requestdto.RequestMemberSignUpDto;
 import com.project.shoppingmall.exception.DuplicationEmailException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -20,49 +20,49 @@ class MemberServiceImplTest {
 
     @Test
     void 회원가입() {
-        MemberDto memberDto = new MemberDto();
-        memberDto.setEmail("wonseok");
-        memberDto.setName("최원석");
-        memberDto.setPassword("1234");
-        memberDto.setPhone("0104123");
-        memberDto.setLocation("노원구");
-        memberService.register(memberDto);
+        RequestMemberSignUpDto requestMemberSignUpDto = new RequestMemberSignUpDto();
+        requestMemberSignUpDto.setEmail("wonseok");
+        requestMemberSignUpDto.setName("최원석");
+        requestMemberSignUpDto.setPassword("1234");
+        requestMemberSignUpDto.setPhone("0104123");
+        requestMemberSignUpDto.setLocation("노원구");
+        memberService.register(requestMemberSignUpDto);
     }
 
     @Test
     void 이미존재하는이메일로회원가입() {
-        MemberDto memberDto = new MemberDto();
-        memberDto.setEmail("wonseok");
-        memberDto.setName("최원석");
-        memberDto.setPassword("1234");
-        memberDto.setPhone("0104123");
-        memberDto.setLocation("노원구");
+        RequestMemberSignUpDto requestMemberSignUpDto = new RequestMemberSignUpDto();
+        requestMemberSignUpDto.setEmail("wonseok");
+        requestMemberSignUpDto.setName("최원석");
+        requestMemberSignUpDto.setPassword("1234");
+        requestMemberSignUpDto.setPhone("0104123");
+        requestMemberSignUpDto.setLocation("노원구");
         assertThrows(DuplicationEmailException.class, () -> {
-            memberService.register(memberDto);
-            memberService.register(memberDto);
+            memberService.register(requestMemberSignUpDto);
+            memberService.register(requestMemberSignUpDto);
         });
     }
 
     @Test
     void 로그인성공() {
-        MemberDto memberDto = new MemberDto();
-        memberDto.setEmail("wonseok");
-        memberDto.setName("최원석");
-        memberDto.setPassword("1234");
-        memberDto.setPhone("0104123");
-        memberDto.setLocation("노원구");
-        memberService.register(memberDto);
+        RequestMemberSignUpDto requestMemberSignUpDto = new RequestMemberSignUpDto();
+        requestMemberSignUpDto.setEmail("wonseok");
+        requestMemberSignUpDto.setName("최원석");
+        requestMemberSignUpDto.setPassword("1234");
+        requestMemberSignUpDto.setPhone("0104123");
+        requestMemberSignUpDto.setLocation("노원구");
+        memberService.register(requestMemberSignUpDto);
         assertNotNull(memberService.login("wonseok", "1234").get());
     }
     @Test
     void 로그인실패() {
-        MemberDto memberDto = new MemberDto();
-        memberDto.setEmail("wonseok");
-        memberDto.setName("최원석");
-        memberDto.setPassword("12344");
-        memberDto.setPhone("0104123");
-        memberDto.setLocation("노원구");
-        memberService.register(memberDto);
+        RequestMemberSignUpDto requestMemberSignUpDto = new RequestMemberSignUpDto();
+        requestMemberSignUpDto.setEmail("wonseok");
+        requestMemberSignUpDto.setName("최원석");
+        requestMemberSignUpDto.setPassword("12344");
+        requestMemberSignUpDto.setPhone("0104123");
+        requestMemberSignUpDto.setLocation("노원구");
+        memberService.register(requestMemberSignUpDto);
         assertTrue(memberService.login("wonseok", "1234").isEmpty());
     }
 }
