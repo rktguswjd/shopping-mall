@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerRequestAction } from "../reducers/user";
+import styled from "./register.module.css";
 
 const Register = ({ history }) => {
     console.log(history);
@@ -55,42 +56,61 @@ const Register = ({ history }) => {
 
     return (
         <>
-            <h1>회원가입</h1>
-            <form onSubmit={onSubmit}>
-                <input
-                    type="email"
-                    placeholder="e-mail을 입력하세요."
-                    onChange={onChangeEmail}
-                />
-                <input
-                    type="text"
-                    placeholder="이름을 입력하세요."
-                    onChange={onChangeName}
-                />
-                <input
-                    type="password"
-                    placeholder="비밀번호를 입력하세요."
-                    onChange={onChangePassword}
-                />
-                <input
-                    type="password"
-                    placeholder="비밀번호 확인"
-                    onChange={onChangePasswordCheck}
-                />
-                <input
-                    type="text"
-                    placeholder="연락처를 입력하세요."
-                    onChange={onChangePhone}
-                />
-                <input
-                    type="text"
-                    placeholder="주소를 입력하세요."
-                    onChange={onChangeAddress}
-                />
-                <button>가입하기</button>
+            <div className={styled.page_name}>SIGN-UP</div>
+            <form onSubmit={onSubmit} className={styled.form}>
+                <div className={styled.form_item}>
+                    <input
+                        type="email"
+                        placeholder="e-mail을 입력하세요."
+                        onChange={onChangeEmail}
+                    />
+                </div>
+                <div className={styled.form_item}>
+                    <input
+                        type="text"
+                        placeholder="이름을 입력하세요."
+                        onChange={onChangeName}
+                    />
+                </div>
+                <div className={styled.form_item}>
+                    <input
+                        type="password"
+                        placeholder="비밀번호를 입력하세요."
+                        onChange={onChangePassword}
+                    />
+                </div>
+                <div className={styled.form_item}>
+                    <input
+                        type="password"
+                        placeholder="비밀번호 확인"
+                        onChange={onChangePasswordCheck}
+                    />
+                </div>
+                <div className={styled.form_item}>
+                    <input
+                        type="text"
+                        placeholder="연락처를 입력하세요."
+                        onChange={onChangePhone}
+                    />
+                </div>
+                <div className={styled.form_item}>
+                    <input
+                        type="text"
+                        placeholder="주소를 입력하세요."
+                        onChange={onChangeAddress}
+                    />
+                </div>
+                <div className={styled.form_item}>
+                    <button className={styled.register_btn}>REGISTER!</button>
+                </div>
             </form>
-            이미 계정이 있나요?
-            <Link to="/login">로그인</Link>
+
+            <div className={styled.transform_text}>
+                이미 계정이 있나요?
+                <Link to="/login" className={styled.transform}>
+                    LOG IN
+                </Link>
+            </div>
         </>
     );
 };

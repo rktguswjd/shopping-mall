@@ -3,49 +3,6 @@
     min-height: 100vh;
 }
 
-a {
-    text-decoration: none !important;
-    color: black;
-}
-
-.nav {
-    display: flex;
-    position: fixed;
-    z-index: 2;
-    justify-content: space-between;
-    padding: 2rem 3rem;
-    width: 100%;
-}
-
-.title {
-    font-size: 2rem;
-}
-
-.nav_toggle_btn {
-    position: absolute;
-    top: 1.2rem;
-    right: 2rem;
-    font-size: 20px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    display: none;
-    cursor: pointer;
-}
-
-.nav_menu {
-    display: flex;
-    align-items: center;
-}
-
-ul {
-    list-style: none;
-}
-
-li {
-    padding: 0 0.8rem;
-}
-
 .main {
     width: 100%;
     max-width: 1500px;
@@ -55,39 +12,6 @@ li {
 }
 
 @media screen and (max-width: 768px) {
-    .nav {
-        padding: 0.75rem 2rem;
-        display: block;
-        background-color: black;
-    }
-
-    a {
-        color: red;
-    }
-
-    .nav_toggle_btn {
-        display: block;
-        color: white;
-    }
-
-    .nav_menu {
-        margin: auto;
-        display: block;
-        text-align: center;
-        display: none;
-        align-items: center;
-    }
-
-    .nav_menu_open {
-        display: block;
-        text-align: center;
-        padding: 0 0;
-    }
-
-    li {
-        margin: 1rem 0;
-    }
-
     .main {
         padding: 6rem 1rem;
         margin: auto;

@@ -7,27 +7,28 @@ const Shop = (props) => {
     return (
         <>
             <ul className={styled.tabs}>
-                <li>
+                <li className={styled.tabs_category}>
                     <NavLink exact to="/shop">
                         ALL
                     </NavLink>
                 </li>
-                <li>
+                <li className={styled.tabs_category}>
                     <NavLink to="/shop/category/outer">OUTER</NavLink>
                 </li>
-                <li>
+                <li className={styled.tabs_category}>
                     <NavLink to="/shop/category/top">TOP</NavLink>
                 </li>
-                <li>
+                <li className={styled.tabs_category}>
                     <NavLink to="/shop/category/pants">PANTS</NavLink>
                 </li>
-                <li>
+                <li className={styled.tabs_category}>
                     <NavLink to="/shop/category/skirt">SKIRT</NavLink>
                 </li>
             </ul>
-
-            <div className={styled.products}>
-                <Product />
+            <div className={styled.productList}>
+                <div className={styled.products}>
+                    <Product />
+                </div>
             </div>
         </>
     );
