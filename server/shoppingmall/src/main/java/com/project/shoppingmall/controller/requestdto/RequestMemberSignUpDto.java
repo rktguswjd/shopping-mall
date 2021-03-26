@@ -1,9 +1,9 @@
-package com.project.shoppingmall.controller.dto;
+package com.project.shoppingmall.controller.requestdto;
 
 import lombok.Data;
 
 @Data
-public class MemberDto {
+public class RequestMemberSignUpDto {
     private String name;
     private String email;
     private String password;
