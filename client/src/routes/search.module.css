@@ -1,0 +1,34 @@
+.page_name {
+    font-family: "Spectral", serif;
+    color: black;
+}
+
+.input {
+    height: 35px;
+    color: #8f8f91;
+    width: 350px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #efefef;
+    background: #efefef;
+}
+
+.btn {
+    font-family: "Spectral", serif;
+    width: 50px;
+    height: 35px;
+    line-height: 60px;
+    color: #2c2c2c;
+    border: 1px solid #f3f3f3;
+    font-size: 12px;
+    letter-spacing: 0.13em;
+    text-align: center;
+    transition: all 0s ease 0s, all 0.93s ease 0s;
+}
+
+.btn:hover {
+    text-decoration: none;
+    background: black;
+    color: #fff;
+    border: 1px solid black;
+}

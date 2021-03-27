@@ -26,7 +26,7 @@ export const registerRequestAction = (email, password) => async (dispatch) => {
         dispatch({
             type: REGISTER_REQUEST,
         });
-        // axios로 이메일과 패스워드 요청후 응답 성공
+        // axios로 회원가입 정보 요청후 응답 성공
 
         dispatch({
             type: REGISTER_SUCCESS,
@@ -39,9 +39,23 @@ export const registerRequestAction = (email, password) => async (dispatch) => {
     }
 };
 
-export const loginRequestAction = (data) => {
+export const loginRequestAction = (email, password) => async (dispatch) => {
     // 로그인 요청시 받아온 응답 저장할 data
-    return { type: LOG_IN_REQUEST, data };
+    try {
+        dispatch({
+            type: LOG_IN_REQUEST,
+        });
+        // axios로 이메일과 패스워드 요청후 응답 성공
+        dispatch({
+            type: LOG_IN_SUCCESS,
+            /*payload: data*/
+        });
+    } catch (error) {
+        dispatch({
+            type: LOG_IN_FAILURE,
+            payload: error.message,
+        });
+    }
 };
 
 export const logout = () => {

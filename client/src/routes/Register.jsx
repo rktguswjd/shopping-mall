@@ -101,7 +101,7 @@ const Register = ({ history }) => {
                     />
                 </div>
                 <div className={styled.form_item}>
-                    <button className={styled.register_btn}>REGISTER!</button>
+                    <button className={styled.register_btn}>REGISTER</button>
                 </div>
             </form>
 

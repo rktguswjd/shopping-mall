@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "./productDetail.module.css";
-
+import { Link } from "react-router-dom";
 const ProductDetail = (props) => {
     return (
         <div className={styled.productDetail}>
@@ -18,7 +18,9 @@ const ProductDetail = (props) => {
                     <div>수량</div>
 
                     <button className={styled.btn}>ADD TO CART</button>
-                    <button className={styled.btn}>BUY NOW</button>
+                    <Link to="/payment">
+                        <button className={styled.btn}>BUY NOW</button>
+                    </Link>
                 </div>
             </div>
             <div className={styled.productDescription}>

@@ -1,18 +1,94 @@
-const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
-
 export const initialState = {
-    // 상품 정보
+    productLoading: false, // 상품 리스트 가져오기 시도 중
+    productDone: false,
+    productError: null,
+    productList: null,
+
+    productDetailLoading: false, // 해당 상품 정보 가져오기 시도 중
+    productDetailDone: false,
+    productDetailError: null,
+    productInfo: null,
 };
 
-const productListRequest = (data) => {
-    // shop 페이지 클릭 시 모든 상품 리스트 요청
-    return { type: PRODUCT_LIST_REQUEST, payload: data };
+const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
+const PRODUCT_LIST_SUCCESS = "PRODUCT_LIST_SUCCESS";
+const PRODUCT_LIST_FAILURE = "PRODUCT_LIST_FAILURE";
+
+const PRODUCT_DETAIL_REQUEST = "PRODUCT_DETAIL_REQUEST";
+const PRODUCT_DETAIL_SUCCESS = "PRODUCT_DETAIL_SUCCESS";
+const PRODUCT_DETAIL_FAILURE = "PRODUCT_DETAIL_FAILURE";
+
+export const productListRequest = (category = "") => async (dispatch) => {
+    try {
+        dispatch({ type: PRODUCT_LIST_REQUEST });
+        // 카테고리 별 상품 목록 데이터 요청
+        dispatch({ type: PRODUCT_LIST_SUCCESS /*payload: data*/ });
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_LIST_FAILURE,
+            payload: error.message,
+        });
+    }
 };
 
-const reducer = (state = [], action) => {
+export const productDetailRequest = (productId) => async (dispatch) => {
+    try {
+        dispatch({ type: PRODUCT_DETAIL_REQUEST });
+        // 해당 상품 데이터 요청
+        dispatch({ type: PRODUCT_DETAIL_SUCCESS /*payload: data*/ });
+    } catch (error) {
+        dispatch({
+            type: PRODUCT_DETAIL_FAILURE,
+            payload: error.message,
+        });
+    }
+};
+
+const reducer = (state = initialState, action) => {
     switch (action.type) {
+        // 상품 리스트
         case PRODUCT_LIST_REQUEST:
-            return { ...state, productList: action.payload };
+            return {
+                ...state,
+                productLoading: true,
+                productDone: false,
+                productError: null,
+            };
+        case PRODUCT_LIST_SUCCESS:
+            return {
+                ...state,
+                productLoading: false,
+                productDone: true,
+                productList: action.payload,
+            };
+        case PRODUCT_LIST_FAILURE:
+            return {
+                ...state,
+                productLoading: false,
+                productError: action.payload,
+            };
+
+        // 상품 정보
+        case PRODUCT_DETAIL_REQUEST:
+            return {
+                ...state,
+                productDetailLoading: true,
+                productDetailDone: false,
+                productDetailError: null,
+            };
+        case PRODUCT_DETAIL_SUCCESS:
+            return {
+                ...state,
+                productDetailLoading: false,
+                productDetailDone: true,
+                productInfo: action.payload,
+            };
+        case PRODUCT_DETAIL_FAILURE:
+            return {
+                ...state,
+                productDetailLoading: false,
+                productDetailError: action.payload,
+            };
 
         default:
             return state;
@@ -21,6 +97,7 @@ const reducer = (state = [], action) => {
 
 export const actionCreators = {
     productListRequest,
+    productDetailRequest,
 };
 
 export default reducer;
