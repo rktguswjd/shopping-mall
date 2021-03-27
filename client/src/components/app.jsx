@@ -10,6 +10,7 @@ import Register from "../routes/Register";
 import ProductDetail from "../routes/ProductDetail";
 import Profile from "../routes/Profile";
 import Header from "./header";
+import Payment from "../routes/Payment";
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -35,6 +36,7 @@ const App = () => {
                     />
                     <Route exact path="/profile" component={Profile} />
                     <Route exact path="/shop/category/top" component={Shop} />
+                    <Route exact path="/payment" component={Payment} />
                 </main>
                 <footer />
             </Router>

@@ -1,0 +1,64 @@
+.page_name {
+    font-family: "Spectral", serif;
+    color: black;
+}
+
+.payment_container {
+    padding: 1rem;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.payment_container_name {
+    text-align: start;
+    margin: 2rem 0;
+    border-bottom: 1px solid #b2b2b2;
+}
+
+.payment_container_content {
+    text-align: start;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+.payment_products {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.payment_product_img {
+    max-width: 100px;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+.payment_product_name {
+    flex-grow: 2;
+}
+.payment_adress {
+    align-items: center;
+}
+
+.payment_adress_input {
+    display: flex;
+}
+
+.payment_btn {
+    font-family: "Spectral", serif;
+    width: 280px;
+    height: 60px;
+    margin-top: 0.5rem;
+    line-height: 60px;
+    color: #2c2c2c;
+    border: 1px solid #f3f3f3;
+    font-size: 12px;
+    letter-spacing: 0.13em;
+    text-align: center;
+    transition: all 0s ease 0s, all 0.93s ease 0s;
+}
+
+.payment_btn:hover {
+    text-decoration: none;
+    background: black;
+    color: #fff;
+    border: 1px solid black;
+}

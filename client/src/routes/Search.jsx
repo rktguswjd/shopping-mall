@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import styled from "./search.module.css";
 
 const Search = (props) => {
     const inputRef = useRef();
@@ -9,10 +10,17 @@ const Search = (props) => {
     };
 
     return (
-        <form onSubmit={onSubmit}>
-            <input ref={inputRef} placeholder="제품을 검색하세요..." />
-            <button>검색</button>
-        </form>
+        <>
+            <div className={styled.page_name}>PRODUCT SEARCH...</div>
+            <form onSubmit={onSubmit}>
+                <input
+                    ref={inputRef}
+                    placeholder="제품을 검색하세요..."
+                    className={styled.input}
+                />
+                <button className={styled.btn}>SEARCH</button>
+            </form>
+        </>
     );
 };
 

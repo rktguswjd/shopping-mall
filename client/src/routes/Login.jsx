@@ -46,7 +46,7 @@ const LogIn = ({ setIsLoggedIn }) => {
                     />
                 </div>
                 <div className={styled.form_item}>
-                    <button className={styled.login_btn}>CONNECT!</button>
+                    <button className={styled.login_btn}>CONNECT</button>
                 </div>
             </form>
             <div className={styled.transform_text}>
