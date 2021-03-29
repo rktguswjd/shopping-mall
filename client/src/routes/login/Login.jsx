@@ -1,14 +1,15 @@
 import React, { useCallback, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { loginRequestAction } from "../../reducers/user";
 
 import styled from "./login.module.css";
 
 const LogIn = ({ setIsLoggedIn }) => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const dispatch = useDispatch();
+    const { logInLoading } = useSelector((state) => state.user);
 
     const onChangeEmail = useCallback((e) => {
         setEmail(e.target.value);
@@ -21,13 +22,11 @@ const LogIn = ({ setIsLoggedIn }) => {
     const onSubmit = useCallback(
         (e) => {
             e.preventDefault();
-
             dispatch(loginRequestAction({ email, password }));
-            setIsLoggedIn(true);
-            console.log(email, password);
         },
         [email, password]
     );
+
     return (
         <>
             <div className={styled.page_name}>LOG-IN</div>

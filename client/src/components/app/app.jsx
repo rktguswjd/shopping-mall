@@ -20,23 +20,30 @@ const App = () => {
                 <Header isLoggedIn={isLoggedIn} />
                 <main className={styled.main}>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/search" component={Search} />
+                    <Route exact path="/shop/search" component={Search} />
                     <Route exact path="/shop" component={Shop} />
                     <Route exact path="/cart" component={Cart} />
-                    <Route
-                        exact
-                        path="/login"
-                        render={() => <LogIn setIsLoggedIn={setIsLoggedIn} />}
-                    />
+                    <Route exact path="/login" component={LogIn} />
+
                     <Route exact path="/register" component={Register} />
                     <Route
                         exact
-                        path="/shop/product/productId"
+                        path="/shop/product/:id"
                         component={ProductDetail}
                     />
                     <Route exact path="/profile" component={Profile} />
-                    <Route exact path="/shop/category/top" component={Shop} />
                     <Route exact path="/payment" component={Payment} />
+
+                    <Route
+                        exact
+                        path="/shop/category/:category"
+                        component={Shop}
+                    />
+                    <Route
+                        exact
+                        path="/shop/search/:keyword"
+                        component={Shop}
+                    />
                 </main>
                 <footer />
             </Router>

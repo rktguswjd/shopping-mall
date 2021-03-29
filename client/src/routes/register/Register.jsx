@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import styled from "./register.module.css";
@@ -14,46 +14,50 @@ const Register = ({ history }) => {
     const [address, setAddress] = useState("");
     const dispatch = useDispatch();
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        if (password !== passwordCheck) {
-            console.log("비밀번호 다름");
-            return;
-        }
-        let data = {
-            email,
-            password,
-            name,
-            phone,
-            address,
-        };
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            if (password !== passwordCheck) {
+                console.log("비밀번호 다름");
+                return;
+            }
+            let data = {
+                email,
+                password,
+                name,
+                phone,
+                address,
+            };
 
-        dispatch(registerRequestAction(data));
-        history.push("/login");
-    };
-    const onChangeEmail = (e) => {
+            dispatch(registerRequestAction(data));
+            history.push("/login");
+        },
+        [email, password, passwordCheck, name, phone, address]
+    );
+
+    const onChangeEmail = useCallback((e) => {
         setEmail(e.target.value);
-    };
+    }, []);
 
-    const onChangeName = (e) => {
+    const onChangeName = useCallback((e) => {
         setName(e.target.value);
-    };
+    }, []);
 
-    const onChangePassword = (e) => {
+    const onChangePassword = useCallback((e) => {
         setPassword(e.target.value);
-    };
+    }, []);
 
-    const onChangePasswordCheck = (e) => {
+    const onChangePasswordCheck = useCallback((e) => {
         setPasswordCheck(e.target.value);
-    };
+    }, []);
 
-    const onChangePhone = (e) => {
+    const onChangePhone = useCallback((e) => {
         setPhone(e.target.value);
-    };
+    }, []);
 
-    const onChangeAddress = (e) => {
+    const onChangeAddress = useCallback((e) => {
         setAddress(e.target.value);
-    };
+    });
 
     return (
         <>

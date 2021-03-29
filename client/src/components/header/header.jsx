@@ -3,9 +3,11 @@ import styled from "./header.module.css";
 import { Link } from "react-router-dom";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
     const [navToggleOpen, setNavToggleOpen] = useState(false);
+    const { userInfo } = useSelector((state) => state.user);
 
     return (
         <header className={styled.nav}>
@@ -38,9 +40,9 @@ const Header = ({ isLoggedIn }) => {
                     <Link to="/cart"> 장바구니</Link>
                 </li>
 
-                {isLoggedIn ? (
+                {userInfo ? (
                     <li className={styled.dropdown}>
-                        현정
+                        {userInfo.name}
                         <div className={styled.dropdown_content}>
                             <div className={styled.dropdown_content_item}>
                                 <Link to="/profile">프로필</Link>
