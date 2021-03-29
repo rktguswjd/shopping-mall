@@ -10,38 +10,26 @@ export const initialState = {
     productInfo: null,
 };
 
-const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
-const PRODUCT_LIST_SUCCESS = "PRODUCT_LIST_SUCCESS";
-const PRODUCT_LIST_FAILURE = "PRODUCT_LIST_FAILURE";
+export const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
+export const PRODUCT_LIST_SUCCESS = "PRODUCT_LIST_SUCCESS";
+export const PRODUCT_LIST_FAILURE = "PRODUCT_LIST_FAILURE";
 
-const PRODUCT_DETAIL_REQUEST = "PRODUCT_DETAIL_REQUEST";
-const PRODUCT_DETAIL_SUCCESS = "PRODUCT_DETAIL_SUCCESS";
-const PRODUCT_DETAIL_FAILURE = "PRODUCT_DETAIL_FAILURE";
+export const PRODUCT_DETAIL_REQUEST = "PRODUCT_DETAIL_REQUEST";
+export const PRODUCT_DETAIL_SUCCESS = "PRODUCT_DETAIL_SUCCESS";
+export const PRODUCT_DETAIL_FAILURE = "PRODUCT_DETAIL_FAILURE";
 
-export const productListRequest = (category = "") => async (dispatch) => {
-    try {
-        dispatch({ type: PRODUCT_LIST_REQUEST });
-        // 카테고리 별 상품 목록 데이터 요청
-        dispatch({ type: PRODUCT_LIST_SUCCESS /*payload: data*/ });
-    } catch (error) {
-        dispatch({
-            type: PRODUCT_LIST_FAILURE,
-            payload: error.message,
-        });
-    }
+export const productListRequest = (category) => {
+    return {
+        type: PRODUCT_LIST_REQUEST,
+        category,
+    };
 };
 
-export const productDetailRequest = (productId) => async (dispatch) => {
-    try {
-        dispatch({ type: PRODUCT_DETAIL_REQUEST });
-        // 해당 상품 데이터 요청
-        dispatch({ type: PRODUCT_DETAIL_SUCCESS /*payload: data*/ });
-    } catch (error) {
-        dispatch({
-            type: PRODUCT_DETAIL_FAILURE,
-            payload: error.message,
-        });
-    }
+export const productDetailRequest = (id) => {
+    return {
+        type: PRODUCT_DETAIL_REQUEST,
+        id,
+    };
 };
 
 const reducer = (state = initialState, action) => {

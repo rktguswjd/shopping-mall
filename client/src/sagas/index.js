@@ -1,4 +1,5 @@
 import { all, fork } from "redux-saga/effects";
+import productSaga from "./product";
 import userSaga from "./user";
 
 export default function* rootSaga() {
@@ -14,5 +15,6 @@ export default function* rootSaga() {
         // put : redux의 dispatch 역할
 
         fork(userSaga),
+        fork(productSaga),
     ]);
 }

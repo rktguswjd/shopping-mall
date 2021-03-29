@@ -1,21 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "./productDetail.module.css";
 import { Link } from "react-router-dom";
-const ProductDetail = (props) => {
+import { useDispatch, useSelector } from "react-redux";
+import { productDetailRequest } from "../../reducers/product";
+
+const ProductDetail = ({ match }) => {
+    const dispatch = useDispatch();
+    const { productInfo } = useSelector((state) => state.product);
+    const id = match.params.id;
+
+    useEffect(() => {
+        dispatch(productDetailRequest(id));
+    }, [id]);
+
     return (
         <div className={styled.productDetail}>
             <div className={styled.productDetailHeader}>
                 <div className={styled.productDetailImg}>
-                    <img
-                        src="https://image.cosstores.com/static/7/5/3/28/A1/hnm40A1283576_02_0974242_001_001_720.jpg"
-                        alt="productName"
-                    />
+                    <img src={productInfo.src} alt="productName" />
                 </div>
 
                 <div className={styled.productSummary}>
-                    <div className={styled.productName}>박시 스웻셔츠</div>
-                    <div className={styled.productPrice}>105,000원</div>
-                    <div>수량</div>
+                    <div className={styled.productName}>{productInfo.name}</div>
+                    <div className={styled.productPrice}>
+                        {productInfo.price}
+                    </div>
+                    <div className={styled.productQuantity}>
+                        <div>수량</div>
+                        <select>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
 
                     <button className={styled.btn}>ADD TO CART</button>
                     <Link to="/payment">

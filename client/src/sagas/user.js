@@ -10,14 +10,15 @@ import {
 } from "../reducers/user";
 
 function logInAPI(data) {
-    return "성공";
+    return { name: "현정" };
 }
 function* logIn(action) {
     try {
         const result = yield call(logInAPI, action.data);
+        console.log(result);
         yield put({
             type: LOG_IN_SUCCESS,
-            /*payload: result.data*/
+            payload: result,
         });
     } catch (error) {
         yield put({
@@ -37,11 +38,11 @@ function* register(action) {
         yield put({
             type: REGISTER_SUCCESS,
             /*payload: result.data*/
-            /*error: err.response.data*/
         });
     } catch (error) {
         yield put({
             type: REGISTER_FAILURE,
+            /*error: err.response.data*/
         });
     }
 }
