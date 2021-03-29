@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerRequestAction } from "../reducers/user";
 import styled from "./register.module.css";
+import { registerRequestAction } from "../../reducers/user";
 
 const Register = ({ history }) => {
     console.log(history);
@@ -27,6 +27,7 @@ const Register = ({ history }) => {
             phone,
             address,
         };
+
         dispatch(registerRequestAction(data));
         history.push("/login");
     };
