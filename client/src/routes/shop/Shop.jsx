@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "./shop.module.css";
 import { NavLink } from "react-router-dom";
-import Product from "../components/product";
+import Product from "../../components/product/product";
 
 const Shop = (props) => {
     return (

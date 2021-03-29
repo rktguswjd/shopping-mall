@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
-import Cart from "../routes/Cart";
-import Home from "../routes/Home";
-import Search from "../routes/Search";
+import Cart from "../../routes/cart/Cart";
+import Home from "../../routes/home/Home";
+import Search from "../../routes/search/Search";
 import styled from "./app.module.css";
-import Shop from "../routes/Shop";
-import Login from "../routes/Login";
-import Register from "../routes/Register";
-import ProductDetail from "../routes/ProductDetail";
-import Profile from "../routes/Profile";
-import Header from "./header";
-import Payment from "../routes/Payment";
+import Shop from "../../routes/shop/Shop";
+import Register from "../../routes/register/Register";
+import ProductDetail from "../../routes/productDetail/ProductDetail";
+import Profile from "../../routes/profile/Profile";
+import Payment from "../../routes/payment/Payment";
+import Header from "../header/header";
+import LogIn from "../../routes/login/Login";
 
 const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,7 +26,7 @@ const App = () => {
                     <Route
                         exact
                         path="/login"
-                        render={() => <Login setIsLoggedIn={setIsLoggedIn} />}
+                        render={() => <LogIn setIsLoggedIn={setIsLoggedIn} />}
                     />
                     <Route exact path="/register" component={Register} />
                     <Route
