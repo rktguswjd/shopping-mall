@@ -12,7 +12,7 @@ const Search = (props) => {
     return (
         <>
             <div className={styled.page_name}>PRODUCT SEARCH...</div>
-            <form onSubmit={onSubmit}>
+            <form onSubmit={onSubmit} className={styled.form}>
                 <input
                     ref={inputRef}
                     placeholder="제품을 검색하세요..."

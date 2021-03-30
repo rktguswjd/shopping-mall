@@ -5,7 +5,7 @@ import { loginRequestAction } from "../../reducers/user";
 
 import styled from "./login.module.css";
 
-const LogIn = ({ setIsLoggedIn }) => {
+const LogIn = ({ history }) => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,6 +23,7 @@ const LogIn = ({ setIsLoggedIn }) => {
         (e) => {
             e.preventDefault();
             dispatch(loginRequestAction({ email, password }));
+            history.push("/");
         },
         [email, password]
     );
@@ -36,6 +37,7 @@ const LogIn = ({ setIsLoggedIn }) => {
                         type="email"
                         placeholder="e-mail"
                         onChange={onChangeEmail}
+                        required
                     />
                 </div>
                 <div className={styled.form_item}>
@@ -43,6 +45,7 @@ const LogIn = ({ setIsLoggedIn }) => {
                         type="password"
                         placeholder="password"
                         onChange={onChangePassword}
+                        required
                     />
                 </div>
                 <div className={styled.form_item}>

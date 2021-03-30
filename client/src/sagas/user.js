@@ -3,7 +3,9 @@ import {
     LOG_IN_REQUEST,
     LOG_IN_SUCCESS,
     LOG_IN_FAILURE,
-    LOG_OUT,
+    LOG_OUT_REQUEST,
+    LOG_OUT_SUCCESS,
+    LOG_OUT_FAILURE,
     REGISTER_REQUEST,
     REGISTER_SUCCESS,
     REGISTER_FAILURE,
@@ -47,6 +49,24 @@ function* register(action) {
     }
 }
 
+function logOutAPI() {
+    return "로그아웃 성공";
+}
+
+function* logOut() {
+    try {
+        yield call(logOutAPI);
+        yield put({
+            type: LOG_OUT_SUCCESS,
+        });
+    } catch (err) {
+        yield put({
+            type: LOG_OUT_FAILURE,
+            error: err.response.data,
+        });
+    }
+}
+
 function* watchLogin() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -55,6 +75,10 @@ function* watchRegister() {
     yield takeLatest(REGISTER_REQUEST, register);
 }
 
+function* watchLogout() {
+    yield takeLatest(LOG_OUT_REQUEST, logOut);
+}
+
 export default function* userSaga() {
-    yield all([fork(watchLogin), fork(watchRegister)]);
+    yield all([fork(watchLogin), fork(watchRegister), fork(watchLogout)]);
 }
