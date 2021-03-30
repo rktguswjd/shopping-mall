@@ -24,6 +24,7 @@ public class MemberController {
 
     private static final ResponseEntity<ResponseSignIn> FAIL_RESPONSE = new ResponseEntity<ResponseSignIn>(HttpStatus.BAD_REQUEST);
 
+    @CrossOrigin(origins = "http://localhost:3000",allowedHeaders = "*")
     @PostMapping("/signIn")
     public ResponseEntity<ResponseSignIn> signIn(@RequestBody RequestMemberSignInDto requestMemberSignInDto){
         Optional<Member> result = memberService.login(requestMemberSignInDto.getEmail(), requestMemberSignInDto.getPassword());
