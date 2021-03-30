@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "./header.module.css";
 import { Link } from "react-router-dom";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutRequestAction } from "../../reducers/user";
 
 const Header = () => {
+    const dispatch = useDispatch();
     const [navToggleOpen, setNavToggleOpen] = useState(false);
     const { userInfo } = useSelector((state) => state.user);
+    const onLogOut = useCallback(() => {
+        dispatch(logoutRequestAction());
+    }, []);
 
     return (
         <header className={styled.nav}>
@@ -31,7 +36,7 @@ const Header = () => {
                 }
             >
                 <li className={styled.nav_menu_item}>
-                    <Link to="/search"> 검색</Link>
+                    <Link to="/shop/search"> 검색</Link>
                 </li>
                 <li className={styled.nav_menu_item}>
                     <Link to="/shop">SHOP</Link>
@@ -50,7 +55,12 @@ const Header = () => {
                             <div className={styled.dropdown_content_item}>
                                 <Link to="/orderlist">주문내역</Link>
                             </div>
-                            <div>로그아웃</div>
+                            <div
+                                className={styled.dropdown_content_item}
+                                onClick={onLogOut}
+                            >
+                                로그아웃
+                            </div>
                         </div>
                     </li>
                 ) : (

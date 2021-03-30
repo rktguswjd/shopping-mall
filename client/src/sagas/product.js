@@ -16,6 +16,7 @@ function productListAPI(category) {
                 "https://image.cosstores.com/static/0/8/0/27/A1/hnm40A1270804_01_0947046_001_001_400.jpg",
             name: "텍스처드 롤 넥 베스트",
             price: "57,500원",
+            description: "기모찌입니다",
         },
         {
             id: 2,
@@ -23,6 +24,7 @@ function productListAPI(category) {
                 "https://image.cosstores.com/static/5/3/4/24/A1/hnm40A1244356_01_0930726_004_001_400.jpg",
             name: "플리츠 에이라인 울 캐시미어 미니 스커트",
             price: "60,000원",
+            description: "기모찌입니다2",
         },
         {
             id: 3,
@@ -30,6 +32,7 @@ function productListAPI(category) {
                 "https://image.cosstores.com/static/5/2/7/20/A1/hnm40A1207257_01_0934476_001_001_400.jpg",
             name: "캐시미어 가디건",
             price: "145,000원",
+            description: "기모찌입니다2",
         },
         {
             id: 4,
@@ -37,6 +40,7 @@ function productListAPI(category) {
                 "https://image.cosstores.com/static/4/7/8/26/A1/hnm40A1268741_01_0961692_003_001_400.jpg",
             name: "와이드 레그 니티드 쇼츠",
             price: "67,500원",
+            description: "기모찌입니다2",
         },
     ];
 }
@@ -49,6 +53,7 @@ function productDetailAPI(id) {
                 "https://image.cosstores.com/static/0/8/0/27/A1/hnm40A1270804_01_0947046_001_001_400.jpg",
             name: "텍스처드 롤 넥 베스트",
             price: "57,500원",
+            description: "기모찌입니다2",
         },
         {
             id: 2,
@@ -56,6 +61,7 @@ function productDetailAPI(id) {
                 "https://image.cosstores.com/static/5/3/4/24/A1/hnm40A1244356_01_0930726_004_001_400.jpg",
             name: "플리츠 에이라인 울 캐시미어 미니 스커트",
             price: "60,000원",
+            description: "기모찌입니다2",
         },
         {
             id: 3,
@@ -63,6 +69,7 @@ function productDetailAPI(id) {
                 "https://image.cosstores.com/static/5/2/7/20/A1/hnm40A1207257_01_0934476_001_001_400.jpg",
             name: "캐시미어 가디건",
             price: "145,000원",
+            description: "기모찌입니다2",
         },
         {
             id: 4,
@@ -70,6 +77,7 @@ function productDetailAPI(id) {
                 "https://image.cosstores.com/static/4/7/8/26/A1/hnm40A1268741_01_0961692_003_001_400.jpg",
             name: "와이드 레그 니티드 쇼츠",
             price: "67,500원",
+            description: "기모찌입니다2",
         },
     ];
 

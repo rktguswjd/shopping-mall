@@ -9,7 +9,7 @@ export const initialState = {
     productDetailError: null,
     productInfo: null,
 };
-
+// 집가서 설명해줄게 흐름을 존나 복잡해
 export const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
 export const PRODUCT_LIST_SUCCESS = "PRODUCT_LIST_SUCCESS";
 export const PRODUCT_LIST_FAILURE = "PRODUCT_LIST_FAILURE";
@@ -64,6 +64,7 @@ const reducer = (state = initialState, action) => {
                 productDetailDone: false,
                 productDetailError: null,
             };
+
         case PRODUCT_DETAIL_SUCCESS:
             return {
                 ...state,
