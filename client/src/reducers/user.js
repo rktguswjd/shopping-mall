@@ -3,15 +3,21 @@ export const initialState = {
     logInLoading: false, // 로그인 시도 중
     logInDone: false,
     logInError: null,
-    userInfo: null,
 
     logOutLoading: false, // 로그아웃 시도 중
     logOutDone: false,
     logOutError: null,
 
-    registerLoading: false, // 회원가입 시도중
+    registerLoading: false, // 회원가입 시도 중
     registerDone: false,
     registerError: null,
+
+    userToken: null, // 유저 토큰
+    userInfo: null, // 유저 정보
+
+    loadUserLoading: false, // 로그인 후 유저 정보 요청 시도 중
+    loadUserDone: false,
+    loadUserError: null,
 };
 
 export const LOG_IN_REQUEST = "LOG_IN_REQUEST";
@@ -25,6 +31,10 @@ export const LOG_OUT_FAILURE = "LOG_OUT_FAILURE";
 export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILURE = "REGISTER_FAILURE";
+
+export const LOAD_USER_REQUEST = "LOAD_USER_REQUEST";
+export const LOAD_USER_SUCCESS = "LOAD_USER_SUCCESS";
+export const LOAD_USER_FAILURE = "LOAD_USER_FAILURE";
 
 export const loginRequestAction = (data) => {
     return {
@@ -43,6 +53,13 @@ export const registerRequestAction = (data) => {
 export const logoutRequestAction = () => {
     return {
         type: LOG_OUT_REQUEST,
+    };
+};
+
+export const loadUserRequestAction = (data) => {
+    return {
+        type: LOAD_USER_REQUEST,
+        data,
     };
 };
 
@@ -78,7 +95,7 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 logInLoading: false,
                 logInDone: true,
-                userInfo: action.payload,
+                userToken: action.payload,
             };
         case LOG_IN_FAILURE:
             return {
@@ -90,22 +107,45 @@ const reducer = (state = initialState, action) => {
         //로그아웃
         case LOG_OUT_REQUEST:
             return {
+                ...state,
                 logOutLoading: true,
                 logOutDone: false,
                 logOutError: null,
             };
-
         case LOG_OUT_SUCCESS:
             return {
+                ...state,
                 logOutLoading: false,
                 logOutDone: true,
                 userInfo: null,
+                userToken: null,
             };
-
         case LOG_OUT_FAILURE:
             return {
                 logOutLoading: false,
                 logOutError: action.error,
+            };
+
+        // 로그인 후 유저 정보
+        case LOAD_USER_REQUEST:
+            return {
+                ...state,
+                loadUserLoading: true,
+                loadUserDone: false,
+                loadUserError: null,
+            };
+        case LOAD_USER_SUCCESS:
+            return {
+                ...state,
+                loadUserLoading: false,
+                loadUserDone: true,
+                userInfo: action.payload,
+            };
+        case LOAD_USER_FAILURE:
+            return {
+                ...state,
+                loadUserLoading: false,
+                loadUserError: action.error,
             };
 
         default:

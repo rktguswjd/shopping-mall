@@ -13,15 +13,14 @@ import Header from "../header/header";
 import LogIn from "../../routes/login/Login";
 
 const App = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     return (
         <div className={styled.wrapper}>
             <Router>
-                <Header isLoggedIn={isLoggedIn} />
+                <Header />
                 <main className={styled.main}>
                     <Route exact path="/" component={Home} />
-                    <Route exact path="/shop/search" component={Search} />
                     <Route exact path="/shop" component={Shop} />
+                    <Route exact path="/shop/search" component={Search} />
                     <Route exact path="/cart" component={Cart} />
                     <Route exact path="/login" component={LogIn} />
 
