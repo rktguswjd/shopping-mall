@@ -10,6 +10,7 @@ const Shop = ({ match }) => {
     const { productList } = useSelector((state) => state.product);
 
     const category = match.params.category;
+    const keyword = match.params.keyword;
 
     useEffect(() => {
         dispatch(productListRequest(category));

@@ -1,19 +1,21 @@
 import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "./register.module.css";
 import { registerRequestAction } from "../../reducers/user";
-import { Alert, message } from "antd";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Register = ({ history }) => {
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
     const [passwordError, setPasswordError] = useState(false);
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
-    const dispatch = useDispatch();
+    const [location, setLocation] = useState("");
+    const { registerLoading } = useSelector((state) => state.user);
 
     const onSubmit = useCallback(
         (e) => {
@@ -23,11 +25,17 @@ const Register = ({ history }) => {
                 return setPasswordError(true);
             }
             dispatch(
-                registerRequestAction({ email, password, name, phone, address })
+                registerRequestAction({
+                    email,
+                    password,
+                    name,
+                    phone,
+                    location,
+                })
             );
             history.push("/login");
         },
-        [email, password, passwordCheck, name, phone, address]
+        [email, password, passwordCheck, name, phone, location]
     );
 
     const onChangeEmail = useCallback((e) => {
@@ -50,8 +58,8 @@ const Register = ({ history }) => {
         setPhone(e.target.value);
     }, []);
 
-    const onChangeAddress = useCallback((e) => {
-        setAddress(e.target.value);
+    const onChangeLocation = useCallback((e) => {
+        setLocation(e.target.value);
     });
 
     return (
@@ -107,12 +115,20 @@ const Register = ({ history }) => {
                     <input
                         type="text"
                         placeholder="주소를 입력하세요."
-                        onChange={onChangeAddress}
+                        onChange={onChangeLocation}
                         required
                     />
                 </div>
                 <div className={styled.form_item}>
-                    <button className={styled.register_btn}>REGISTER</button>
+                    <button className={styled.register_btn}>
+                        {registerLoading ? (
+                            <div className="fa-2x">
+                                <FontAwesomeIcon icon={faSpinner} pulse />
+                            </div>
+                        ) : (
+                            "REGISTER"
+                        )}
+                    </button>
                 </div>
             </form>
 

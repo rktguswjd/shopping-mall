@@ -9,7 +9,7 @@ export const initialState = {
     productDetailError: null,
     productInfo: null,
 };
-// 집가서 설명해줄게 흐름을 존나 복잡해
+
 export const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
 export const PRODUCT_LIST_SUCCESS = "PRODUCT_LIST_SUCCESS";
 export const PRODUCT_LIST_FAILURE = "PRODUCT_LIST_FAILURE";
@@ -18,10 +18,15 @@ export const PRODUCT_DETAIL_REQUEST = "PRODUCT_DETAIL_REQUEST";
 export const PRODUCT_DETAIL_SUCCESS = "PRODUCT_DETAIL_SUCCESS";
 export const PRODUCT_DETAIL_FAILURE = "PRODUCT_DETAIL_FAILURE";
 
-export const productListRequest = (category) => {
+export const PRODUCT_SEARCH_REQUEST = "PRODUCT_SEARCH_REQUEST";
+export const PRODUCT_SEARCH_SUCCESS = "PRODUCT_SEARCH_SUCCESS";
+export const PRODUCT_SEARCH_FAILURE = "PRODUCT_SEARCH_FAILURE";
+
+export const productListRequest = (category = "", keyword = "") => {
+    const data = { category, keyword };
     return {
         type: PRODUCT_LIST_REQUEST,
-        category,
+        data,
     };
 };
 
