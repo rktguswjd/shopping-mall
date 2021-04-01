@@ -10,6 +10,9 @@ import com.project.shoppingmall.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -24,7 +27,6 @@ public class MemberController {
 
     private static final ResponseEntity<ResponseSignIn> FAIL_RESPONSE = new ResponseEntity<ResponseSignIn>(HttpStatus.BAD_REQUEST);
 
-    @CrossOrigin(origins = "http://localhost:3000",allowedHeaders = "*")
     @PostMapping("/signIn")
     public ResponseEntity<ResponseSignIn> signIn(@RequestBody RequestMemberSignInDto requestMemberSignInDto){
         Optional<Member> result = memberService.login(requestMemberSignInDto.getEmail(), requestMemberSignInDto.getPassword());
@@ -45,5 +47,9 @@ public class MemberController {
         return ResponseEntity.ok().body(token);
     }
 
+    @GetMapping("/auth")
+    Authentication authentication() {
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
 
 }
