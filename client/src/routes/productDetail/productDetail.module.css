@@ -18,9 +18,16 @@
 }
 
 .productName {
+    margin-bottom: 0.5rem;
 }
 
 .productPrice {
+    margin-bottom: 0.5rem;
+}
+
+.productQuantity {
+    display: flex;
+    margin-bottom: 0.5rem;
 }
 
 .btn {

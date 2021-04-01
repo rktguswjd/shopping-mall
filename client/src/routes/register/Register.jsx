@@ -1,58 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { registerRequestAction } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "./register.module.css";
+import { registerRequestAction } from "../../reducers/user";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Register = ({ history }) => {
-    console.log(history);
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordCheck, setPasswordCheck] = useState("");
+    const [passwordError, setPasswordError] = useState(false);
     const [name, setName] = useState("");
     const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
-    const dispatch = useDispatch();
+    const [location, setLocation] = useState("");
+    const { registerLoading } = useSelector((state) => state.user);
 
-    const onSubmit = (e) => {
-        e.preventDefault();
-        if (password !== passwordCheck) {
-            console.log("비밀번호 다름");
-            return;
-        }
-        let data = {
-            email,
-            password,
-            name,
-            phone,
-            address,
-        };
-        dispatch(registerRequestAction(data));
-        history.push("/login");
-    };
-    const onChangeEmail = (e) => {
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+
+            if (password !== passwordCheck) {
+                return setPasswordError(true);
+            }
+            dispatch(
+                registerRequestAction({
+                    email,
+                    password,
+                    name,
+                    phone,
+                    location,
+                })
+            );
+            history.push("/login");
+        },
+        [email, password, passwordCheck, name, phone, location]
+    );
+
+    const onChangeEmail = useCallback((e) => {
         setEmail(e.target.value);
-    };
+    }, []);
 
-    const onChangeName = (e) => {
+    const onChangeName = useCallback((e) => {
         setName(e.target.value);
-    };
+    }, []);
 
-    const onChangePassword = (e) => {
+    const onChangePassword = useCallback((e) => {
         setPassword(e.target.value);
-    };
+    }, []);
 
-    const onChangePasswordCheck = (e) => {
+    const onChangePasswordCheck = useCallback((e) => {
         setPasswordCheck(e.target.value);
-    };
+    }, []);
 
-    const onChangePhone = (e) => {
+    const onChangePhone = useCallback((e) => {
         setPhone(e.target.value);
-    };
+    }, []);
 
-    const onChangeAddress = (e) => {
-        setAddress(e.target.value);
-    };
+    const onChangeLocation = useCallback((e) => {
+        setLocation(e.target.value);
+    });
 
     return (
         <>
@@ -63,6 +71,7 @@ const Register = ({ history }) => {
                         type="email"
                         placeholder="e-mail을 입력하세요."
                         onChange={onChangeEmail}
+                        required
                     />
                 </div>
                 <div className={styled.form_item}>
@@ -70,6 +79,7 @@ const Register = ({ history }) => {
                         type="text"
                         placeholder="이름을 입력하세요."
                         onChange={onChangeName}
+                        required
                     />
                 </div>
                 <div className={styled.form_item}>
@@ -77,6 +87,7 @@ const Register = ({ history }) => {
                         type="password"
                         placeholder="비밀번호를 입력하세요."
                         onChange={onChangePassword}
+                        required
                     />
                 </div>
                 <div className={styled.form_item}>
@@ -84,24 +95,40 @@ const Register = ({ history }) => {
                         type="password"
                         placeholder="비밀번호 확인"
                         onChange={onChangePasswordCheck}
+                        required
                     />
                 </div>
+                {passwordError && (
+                    <div style={{ color: "red" }}>
+                        비밀번호가 일치하지 않습니다.
+                    </div>
+                )}
                 <div className={styled.form_item}>
                     <input
                         type="text"
-                        placeholder="연락처를 입력하세요."
+                        placeholder="-없이 연락처를 입력하세요."
                         onChange={onChangePhone}
+                        required
                     />
                 </div>
                 <div className={styled.form_item}>
                     <input
                         type="text"
                         placeholder="주소를 입력하세요."
-                        onChange={onChangeAddress}
+                        onChange={onChangeLocation}
+                        required
                     />
                 </div>
                 <div className={styled.form_item}>
-                    <button className={styled.register_btn}>REGISTER!</button>
+                    <button className={styled.register_btn}>
+                        {registerLoading ? (
+                            <div className="fa-2x">
+                                <FontAwesomeIcon icon={faSpinner} pulse />
+                            </div>
+                        ) : (
+                            "REGISTER"
+                        )}
+                    </button>
                 </div>
             </form>
 

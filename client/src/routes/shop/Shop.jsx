@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "./shop.module.css";
 import { NavLink } from "react-router-dom";
-import Product from "../components/product";
+import Product from "../../components/product/product";
+import { productListRequest } from "../../reducers/product";
+import { useDispatch, useSelector } from "react-redux";
 
-const Shop = (props) => {
+const Shop = ({ match }) => {
+    const dispatch = useDispatch();
+    const { productList } = useSelector((state) => state.product);
+
+    const category = match.params.category;
+    const keyword = match.params.keyword;
+
+    useEffect(() => {
+        dispatch(productListRequest(category));
+    }, [category]);
+
     return (
         <>
             <ul className={styled.tabs}>
@@ -27,7 +39,10 @@ const Shop = (props) => {
             </ul>
             <div className={styled.productList}>
                 <div className={styled.products}>
-                    <Product />
+                    {productList &&
+                        productList.map((product) => (
+                            <Product key={product.id} product={product} />
+                        ))}
                 </div>
             </div>
         </>

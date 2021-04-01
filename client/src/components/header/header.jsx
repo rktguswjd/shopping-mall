@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "./header.module.css";
 import { Link } from "react-router-dom";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutRequestAction } from "../../reducers/user";
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
+    const dispatch = useDispatch();
     const [navToggleOpen, setNavToggleOpen] = useState(false);
+    const { userInfo } = useSelector((state) => state.user);
+    const onLogOut = useCallback(() => {
+        dispatch(logoutRequestAction());
+    }, []);
 
     return (
         <header className={styled.nav}>
@@ -29,7 +36,7 @@ const Header = ({ isLoggedIn }) => {
                 }
             >
                 <li className={styled.nav_menu_item}>
-                    <Link to="/search"> 검색</Link>
+                    <Link to="/shop/search"> 검색</Link>
                 </li>
                 <li className={styled.nav_menu_item}>
                     <Link to="/shop">SHOP</Link>
@@ -38,9 +45,9 @@ const Header = ({ isLoggedIn }) => {
                     <Link to="/cart"> 장바구니</Link>
                 </li>
 
-                {isLoggedIn ? (
+                {userInfo ? (
                     <li className={styled.dropdown}>
-                        현정
+                        {userInfo.name}
                         <div className={styled.dropdown_content}>
                             <div className={styled.dropdown_content_item}>
                                 <Link to="/profile">프로필</Link>
@@ -48,7 +55,12 @@ const Header = ({ isLoggedIn }) => {
                             <div className={styled.dropdown_content_item}>
                                 <Link to="/orderlist">주문내역</Link>
                             </div>
-                            <div>로그아웃</div>
+                            <div
+                                className={styled.dropdown_content_item}
+                                onClick={onLogOut}
+                            >
+                                로그아웃
+                            </div>
                         </div>
                     </li>
                 ) : (
