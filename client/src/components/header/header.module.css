@@ -46,8 +46,8 @@ ul {
 }
 
 .dropdown {
+    padding: 0 0.8rem;
     position: relative;
-    display: inline-block;
 }
 
 .dropdown:hover {
@@ -80,6 +80,7 @@ ul {
         display: block;
         background-color: black;
     }
+
     .nav a {
         color: white;
     }
@@ -110,5 +111,15 @@ ul {
 
     .nav_menu_item {
         margin: 1rem 0;
+    }
+
+    .dropdown {
+        margin: 1rem 0;
+        position: relative;
+        color: white;
+    }
+
+    .dropdown_content {
+        position: relative;
     }
 }

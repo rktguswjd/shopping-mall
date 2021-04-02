@@ -11,6 +11,8 @@ import Profile from "../../routes/profile/Profile";
 import Payment from "../../routes/payment/Payment";
 import Header from "../header/header";
 import LogIn from "../../routes/login/Login";
+import ProductList from "../../routes/productList/productList";
+import ProductCreate from "../../routes/productCreate/productCreate";
 
 const App = () => {
     return (
@@ -42,6 +44,18 @@ const App = () => {
                         exact
                         path="/shop/search/:keyword"
                         component={Shop}
+                    />
+                    <Route exact path="/admin/userlist" />
+                    <Route
+                        exact
+                        path="/admin/productlist"
+                        component={ProductList}
+                    />
+                    <Route exact path="/admin/orderlist" />
+                    <Route
+                        exact
+                        path="/admin/product/create"
+                        component={ProductCreate}
                     />
                 </main>
                 <footer />

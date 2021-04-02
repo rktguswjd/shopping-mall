@@ -6,6 +6,9 @@ import {
     PRODUCT_DETAIL_REQUEST,
     PRODUCT_DETAIL_SUCCESS,
     PRODUCT_DETAIL_FAILURE,
+    PRODUCT_CREATE_REQUEST,
+    PRODUCT_CREATE_SUCCESS,
+    PRODUCT_CREATE_FAILURE,
 } from "../reducers/product";
 
 function productListAPI(category) {
@@ -43,6 +46,21 @@ function productListAPI(category) {
             description: "기모찌입니다2",
         },
     ];
+}
+
+function* productList(action) {
+    try {
+        const result = yield call(productListAPI, action.category);
+        yield put({
+            type: PRODUCT_LIST_SUCCESS,
+            payload: result,
+        });
+    } catch (error) {
+        yield put({
+            type: PRODUCT_LIST_FAILURE,
+            /*error: err.response.data*/
+        });
+    }
 }
 
 function productDetailAPI(id) {
@@ -84,21 +102,6 @@ function productDetailAPI(id) {
     return list.find((e) => e.id === Number(id));
 }
 
-function* productList(action) {
-    try {
-        const result = yield call(productListAPI, action.category);
-        yield put({
-            type: PRODUCT_LIST_SUCCESS,
-            payload: result,
-        });
-    } catch (error) {
-        yield put({
-            type: PRODUCT_LIST_FAILURE,
-            /*error: err.response.data*/
-        });
-    }
-}
-
 function* productDetail(action) {
     try {
         const result = yield call(productDetailAPI, action.id);
@@ -114,6 +117,25 @@ function* productDetail(action) {
     }
 }
 
+function productCreateAPI(data) {
+    return "서공";
+}
+
+function* productCreate(action) {
+    try {
+        yield call(productCreateAPI, action.data);
+        yield put({
+            type: PRODUCT_CREATE_SUCCESS,
+        });
+        console.log(action);
+    } catch (error) {
+        yield put({
+            type: PRODUCT_CREATE_FAILURE,
+            /*error: err.response.data*/
+        });
+    }
+}
+
 function* watchProductList() {
     yield takeLatest(PRODUCT_LIST_REQUEST, productList);
 }
@@ -122,6 +144,14 @@ function* watchProductDetail() {
     yield takeLatest(PRODUCT_DETAIL_REQUEST, productDetail);
 }
 
+function* watchProductCreate() {
+    yield takeLatest(PRODUCT_CREATE_REQUEST, productCreate);
+}
+
 export default function* productSaga() {
-    yield all([fork(watchProductList), fork(watchProductDetail)]);
+    yield all([
+        fork(watchProductList),
+        fork(watchProductDetail),
+        fork(watchProductCreate),
+    ]);
 }

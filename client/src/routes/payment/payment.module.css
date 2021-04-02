@@ -13,6 +13,8 @@
     text-align: start;
     margin: 2rem 0;
     border-bottom: 1px solid #b2b2b2;
+    font-family: "Spectral", serif;
+    color: black;
 }
 
 .payment_container_content {
