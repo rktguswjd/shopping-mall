@@ -39,40 +39,42 @@ const LogIn = ({ history, location }) => {
     return (
         <>
             <div className={styled.page_name}>LOG-IN</div>
-            <form onSubmit={onSubmit} className={styled.form}>
-                <div className={styled.form_item}>
-                    <input
-                        type="email"
-                        placeholder="e-mail"
-                        onChange={onChangeEmail}
-                        required
-                    />
+            <div className={styled.product_create_form}>
+                <form onSubmit={onSubmit} className={styled.form}>
+                    <div className={styled.form_item}>
+                        <input
+                            type="email"
+                            placeholder="e-mail"
+                            onChange={onChangeEmail}
+                            required
+                        />
+                    </div>
+                    <div className={styled.form_item}>
+                        <input
+                            type="password"
+                            placeholder="password"
+                            onChange={onChangePassword}
+                            required
+                        />
+                    </div>
+                    <div className={styled.form_item}>
+                        <button className={styled.login_btn}>
+                            {logInLoading ? (
+                                <div className="fa-2x">
+                                    <FontAwesomeIcon icon={faSpinner} pulse />
+                                </div>
+                            ) : (
+                                "CONNECT"
+                            )}
+                        </button>
+                    </div>
+                </form>
+                <div className={styled.transform_text}>
+                    아직 계정이 없나요?{" "}
+                    <Link to="/register" className={styled.transform}>
+                        JOIN US
+                    </Link>
                 </div>
-                <div className={styled.form_item}>
-                    <input
-                        type="password"
-                        placeholder="password"
-                        onChange={onChangePassword}
-                        required
-                    />
-                </div>
-                <div className={styled.form_item}>
-                    <button className={styled.login_btn}>
-                        {logInLoading ? (
-                            <div className="fa-2x">
-                                <FontAwesomeIcon icon={faSpinner} pulse />
-                            </div>
-                        ) : (
-                            "CONNECT"
-                        )}
-                    </button>
-                </div>
-            </form>
-            <div className={styled.transform_text}>
-                아직 계정이 없나요?{" "}
-                <Link to="/register" className={styled.transform}>
-                    JOIN US
-                </Link>
             </div>
         </>
     );
