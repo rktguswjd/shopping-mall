@@ -8,6 +8,19 @@ export const initialState = {
     productDetailDone: false,
     productDetailError: null,
     productInfo: null,
+
+    cartList: null, // 장바구니 정보
+    cartAddLoading: false, // 장바구니 담기 시도중
+    cartAddDone: false,
+    cartAddError: null,
+
+    cartRemoveLoading: false, // 장바구니 상품 삭제 시도중
+    cartRemoveDone: false,
+    cartRemoveError: null,
+
+    productCreateLoading: false, // 관리자 상품 등록
+    productCreateDone: false,
+    productCreateError: null,
 };
 
 export const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
@@ -22,6 +35,18 @@ export const PRODUCT_SEARCH_REQUEST = "PRODUCT_SEARCH_REQUEST";
 export const PRODUCT_SEARCH_SUCCESS = "PRODUCT_SEARCH_SUCCESS";
 export const PRODUCT_SEARCH_FAILURE = "PRODUCT_SEARCH_FAILURE";
 
+export const CART_ADD_REQUEST = "CART_ADD_REQUEST";
+export const CART_ADD_SUCCESS = "CART_ADD_SUCCESS";
+export const CART_ADD_FAILURE = "CART_ADD_FAILURE";
+
+export const CART_REMOVE_REQUEST = "CART_REMOVE_REQUEST";
+export const CART_REMOVE_SUCCESS = "CART_REMOVE_SUCCESS";
+export const CART_REMOVE_FAILURE = "CART_REMOVE_FAILURE";
+
+export const PRODUCT_CREATE_REQUEST = "PRODUCT_CREATE_REQUEST";
+export const PRODUCT_CREATE_SUCCESS = "PRODUCT_CREATE_SUCCESS";
+export const PRODUCT_CREATE_FAILURE = "PRODUCT_CREATE_FAILURE";
+
 export const productListRequest = (category = "", keyword = "") => {
     const data = { category, keyword };
     return {
@@ -34,6 +59,21 @@ export const productDetailRequest = (id) => {
     return {
         type: PRODUCT_DETAIL_REQUEST,
         id,
+    };
+};
+
+export const cartAddRequest = (id, qty) => {
+    const data = { id, qty };
+    return {
+        type: CART_ADD_REQUEST,
+        data,
+    };
+};
+
+export const productCreateRequest = (data) => {
+    return {
+        type: PRODUCT_CREATE_REQUEST,
+        data,
     };
 };
 
@@ -84,6 +124,26 @@ const reducer = (state = initialState, action) => {
                 productDetailError: action.payload,
             };
 
+        // 상품 등록
+        case PRODUCT_CREATE_REQUEST:
+            return {
+                ...state,
+                productCreateLoading: true,
+                productCreateDone: false,
+                productCreateError: null,
+            };
+        case PRODUCT_CREATE_SUCCESS:
+            return {
+                ...state,
+                productCreateLoading: false,
+                productCreateDone: true,
+            };
+        case PRODUCT_CREATE_FAILURE:
+            return {
+                ...state,
+                productCreateLoading: false,
+                productCreateError: action.payload,
+            };
         default:
             return state;
     }
@@ -92,6 +152,7 @@ const reducer = (state = initialState, action) => {
 export const actionCreators = {
     productListRequest,
     productDetailRequest,
+    productCreateRequest,
 };
 
 export default reducer;

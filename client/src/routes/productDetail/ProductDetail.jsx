@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "./productDetail.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { productDetailRequest } from "../../reducers/product";
 
 const ProductDetail = ({ match }) => {
+    const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const id = match.params.id;
     const products = useSelector((state) => state.product);
@@ -32,11 +33,18 @@ const ProductDetail = ({ match }) => {
                             </div>
                             <div className={styled.productQuantity}>
                                 <div>수량</div>
-                                <select>
+                                <select
+                                    className={styled.productSelect}
+                                    value={quantity}
+                                    onChange={(e) =>
+                                        setQuantity(e.target.value)
+                                    }
+                                >
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
+                                    <option value="5">5</option>
                                 </select>
                             </div>
 

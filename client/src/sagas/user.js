@@ -75,7 +75,7 @@ function* logOut() {
 }
 
 function loadUserAPI(data) {
-    return { name: "현정" };
+    return { name: "현정", isAdmin: true };
 }
 
 function* loadUser(action) {
