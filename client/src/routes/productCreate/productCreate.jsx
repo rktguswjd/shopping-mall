@@ -77,7 +77,7 @@ const ProductCreate = ({ history }) => {
             <div className={styled.page_name}>PRODUCT REGISTER</div>
             <form className={styled.form} onSubmit={onSubmit}>
                 <table className={styled.table}>
-                    <tr className={styled.tr}>
+                    <tr>
                         <th>상품명</th>
                         <td>
                             <input
@@ -88,7 +88,7 @@ const ProductCreate = ({ history }) => {
                             />
                         </td>
                     </tr>
-                    <tr className={styled.tr}>
+                    <tr>
                         <th>카테고리</th>
                         <td>
                             <select
@@ -104,7 +104,7 @@ const ProductCreate = ({ history }) => {
                         </td>
                     </tr>
 
-                    <tr className={styled.tr}>
+                    <tr>
                         <th>재고수량</th>
                         <td>
                             <input
@@ -116,7 +116,7 @@ const ProductCreate = ({ history }) => {
                         </td>
                     </tr>
 
-                    <tr className={styled.tr}>
+                    <tr>
                         <th>가격</th>
                         <td>
                             <input
@@ -128,7 +128,7 @@ const ProductCreate = ({ history }) => {
                         </td>
                     </tr>
 
-                    <tr className={styled.tr}>
+                    <tr>
                         <th>상품사진</th>
                         <td>
                             <input
@@ -138,7 +138,7 @@ const ProductCreate = ({ history }) => {
                                 required
                             />
                             {photo && (
-                                <div>
+                                <div className={styled.preview_content}>
                                     <img
                                         className={styled.preview}
                                         src={preview}
@@ -148,7 +148,7 @@ const ProductCreate = ({ history }) => {
                         </td>
                     </tr>
 
-                    <tr className={styled.tr}>
+                    <tr>
                         <th>제품설명</th>
                         <td>
                             <textarea

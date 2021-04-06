@@ -4,12 +4,40 @@
     margin-bottom: 1rem;
 }
 
+.product_management {
+}
+.produproduct_list {
+    text-align: center;
+}
+
+.table {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #b2b2b2;
+}
+
+.table td {
+    padding: 0.5rem;
+    border: 1px solid #b2b2b2;
+    text-align: center;
+}
+
+.table th {
+    padding: 0.8rem;
+    border: 1px solid #b2b2b2;
+    background-color: #f3f3f3;
+}
+
+.table img {
+    width: 80px;
+    height: auto;
+}
+
 .btn {
     font-family: "Spectral", serif;
-    width: 280px;
-    height: 60px;
-    margin-top: 0.5rem;
-    line-height: 60px;
+    width: 180px;
+    height: 40px;
+    margin-bottom: 0.5rem;
     color: #2c2c2c;
     border: 1px solid #f3f3f3;
     font-size: 12px;

@@ -9,6 +9,7 @@
     padding: 10rem 0;
     margin: auto;
     text-align: center;
+    font-family: "Spectral", "Noto Sans KR", sans-serif;
 }
 
 @media screen and (max-width: 768px) {
