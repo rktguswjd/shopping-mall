@@ -1,5 +1,4 @@
 .page_name {
-    font-family: "Spectral", serif;
     color: black;
     margin-bottom: 1rem;
 }
@@ -9,7 +8,6 @@
 }
 
 .transform_text .transform {
-    font-family: "Spectral", serif;
 }
 
 .transform:hover {
@@ -40,7 +38,6 @@
 }
 
 .login_btn {
-    font-family: "Spectral", serif;
     width: 280px;
     height: 60px;
     margin-top: 0.5rem;

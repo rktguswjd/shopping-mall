@@ -49,8 +49,14 @@
     border: 1px solid #b2b2b2;
 }
 
+.preview_content {
+    margin-top: 0.8rem;
+    width: 400px;
+    height: auto;
+}
+
 .preview {
-    max-width: 50%;
+    max-width: 100%;
     height: auto;
 }
 

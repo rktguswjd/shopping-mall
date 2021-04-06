@@ -1,10 +1,18 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "./productList.module.css";
-import { Link } from "react-router-dom";
+import { productListRequest } from "../../reducers/product";
 
-const ProductList = ({ history }) => {
+const ProductList = ({ history, match }) => {
+    const dispatch = useDispatch();
     const { userInfo } = useSelector((state) => state.user);
+    const { productList } = useSelector((state) => state.product);
+    const [category, setCategory] = useState("");
+
+    const onChangeSelect = useCallback((e) => {
+        setCategory(e.target.value);
+    });
+
     useEffect(() => {
         if (!userInfo) {
             history.push("/login");
@@ -13,14 +21,52 @@ const ProductList = ({ history }) => {
         if (!userInfo.isAdmin) {
             history.push("/");
         }
+        dispatch(productListRequest(category));
     }, [userInfo]);
-
+    console.log(category);
     return (
         <>
             <div className={styled.page_name}>PRODUCT MANAGEMENT</div>
-            <Link to="/admin/product/create">
-                <button className={styled.btn}>PRODUCT CREATE</button>
-            </Link>
+            <div className={styled.product_management}>
+                <div className={styled.product_list}>
+                    <table className={styled.table}>
+                        <thead>
+                            <th>
+                                <select onChange={onChangeSelect}>
+                                    <option value="">all</option>
+                                    <option value="outer">OUTER</option>
+                                    <option value="top">TOP</option>
+                                    <option value="pants">PANTS</option>
+                                    <option value="skirt">SKIRT</option>
+                                </select>
+                            </th>
+                            <th>상품명</th>
+                            <th>상품사진</th>
+                            <th>재고수량</th>
+                            <th>가격</th>
+                            <th>edit/delete</th>
+                        </thead>
+                        <tbody>
+                            {productList &&
+                                productList.map((product) => (
+                                    <tr key={product.id}>
+                                        <td>{product.category}</td>
+                                        <td>{product.name}</td>
+                                        <td>
+                                            <img src={product.src} />
+                                        </td>
+                                        <td>{product.stock}</td>
+                                        <td>{product.price}</td>
+                                        <td>
+                                            <button>수정</button>
+                                            <button>삭제</button>
+                                        </td>
+                                    </tr>
+                                ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </>
     );
 };
