@@ -7,6 +7,10 @@ import com.project.shoppingmall.controller.responsedto.ResponseSignIn;
 import com.project.shoppingmall.domain.Member;
 import com.project.shoppingmall.security.JwtTokenProvider;
 import com.project.shoppingmall.service.MemberService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@Api(value = "회원 V1")
 @RequestMapping("/member")
 @RequiredArgsConstructor
 public class MemberController {
@@ -27,27 +32,29 @@ public class MemberController {
 
     private static final ResponseEntity<ResponseSignIn> FAIL_RESPONSE = new ResponseEntity<ResponseSignIn>(HttpStatus.BAD_REQUEST);
 
-    @PostMapping("/signIn")
-    public ResponseEntity<ResponseSignIn> signIn(@RequestBody RequestMemberSignInDto requestMemberSignInDto){
+    @ApiOperation(value = "로그인", notes = "회원/관리자 로그인")
+    @PostMapping("signIn")
+    public ResponseEntity<ResponseSignIn> signIn(@RequestBody RequestMemberSignInDto requestMemberSignInDto) {
         Optional<Member> result = memberService.login(requestMemberSignInDto.getEmail(), requestMemberSignInDto.getPassword());
-        if(result.isEmpty()) return FAIL_RESPONSE;
+        if (result.isEmpty()) return FAIL_RESPONSE;
         return ResponseEntity.ok()
-                .header("X-AUTH-TOKEN",jwtTokenProvider.createToken(result.get().getUsername(), result.get().getRole().name()))
+                .header("X-AUTH-TOKEN", jwtTokenProvider.createToken(result.get().getUsername(), result.get().getRole().name()))
                 .body(ResponseSignIn.success());
     }
 
-    @PostMapping("/signUp")
-    public ResponseEntity signUp(@RequestBody RequestMemberSignUpDto requestMemberSignUpDto){
+    @ApiOperation(value = "회원가입", notes = "")
+    @PostMapping("signUp")
+    public ResponseEntity signUp(@RequestBody RequestMemberSignUpDto requestMemberSignUpDto) {
         memberService.register(requestMemberSignUpDto);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @GetMapping("/myInfo")
-    public ResponseEntity<String> myInfo(@RequestHeader("X-AUTH-TOKEN") String token){
+    @GetMapping("myInfo")
+    public ResponseEntity<String> myInfo(@RequestHeader("X-AUTH-TOKEN") String token) {
         return ResponseEntity.ok().body(token);
     }
 
-    @GetMapping("/auth")
+    @GetMapping("auth")
     Authentication authentication() {
         return SecurityContextHolder.getContext().getAuthentication();
     }
