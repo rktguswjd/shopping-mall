@@ -23,7 +23,7 @@ const ProductList = ({ history, match }) => {
         }
         dispatch(productListRequest(category));
     }, [userInfo]);
-    console.log(category);
+
     return (
         <>
             <div className={styled.page_name}>PRODUCT MANAGEMENT</div>

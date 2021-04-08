@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import styled from "./productDetail.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { productDetailRequest } from "../../reducers/product";
+import { productDetailRequest, addToCartRequest } from "../../reducers/product";
 
-const ProductDetail = ({ match }) => {
+const ProductDetail = ({ match, history }) => {
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const id = match.params.id;
@@ -14,6 +14,11 @@ const ProductDetail = ({ match }) => {
     useEffect(() => {
         dispatch(productDetailRequest(id));
     }, [id]);
+
+    const onClickAddToCart = useCallback(() => {
+        dispatch(addToCartRequest(id, quantity));
+        history.push("/cart");
+    }, []);
 
     return (
         <>
@@ -48,7 +53,12 @@ const ProductDetail = ({ match }) => {
                                 </select>
                             </div>
 
-                            <button className={styled.btn}>ADD TO CART</button>
+                            <button
+                                className={styled.btn}
+                                onClick={onClickAddToCart}
+                            >
+                                ADD TO CART
+                            </button>
                             <Link to="/payment">
                                 <button className={styled.btn}>BUY NOW</button>
                             </Link>
