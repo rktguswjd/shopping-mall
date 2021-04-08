@@ -10,6 +10,11 @@ export const initialState = {
     productInfo: null,
 
     cartList: null, // 장바구니 정보
+
+    cartListLoading: false, // 장바구니 리스트 가져오기 시도중
+    cartListDone: false,
+    cartListError: null,
+
     cartAddLoading: false, // 장바구니 담기 시도중
     cartAddDone: false,
     cartAddError: null,
@@ -39,6 +44,10 @@ export const CART_ADD_REQUEST = "CART_ADD_REQUEST";
 export const CART_ADD_SUCCESS = "CART_ADD_SUCCESS";
 export const CART_ADD_FAILURE = "CART_ADD_FAILURE";
 
+export const CART_LIST_REQUEST = "CART_LIST_REQUEST";
+export const CART_LIST_SUCCESS = "CART_LIST_SUCCESS";
+export const CART_LIST_FAILURE = "CART_LIST_FAILURE";
+
 export const CART_REMOVE_REQUEST = "CART_REMOVE_REQUEST";
 export const CART_REMOVE_SUCCESS = "CART_REMOVE_SUCCESS";
 export const CART_REMOVE_FAILURE = "CART_REMOVE_FAILURE";
@@ -62,11 +71,17 @@ export const productDetailRequest = (id) => {
     };
 };
 
-export const cartAddRequest = (id, qty) => {
+export const addToCartRequest = (id = "", qty = "") => {
     const data = { id, qty };
     return {
         type: CART_ADD_REQUEST,
         data,
+    };
+};
+
+export const cartListRequest = () => {
+    return {
+        type: CART_LIST_REQUEST,
     };
 };
 
@@ -144,6 +159,49 @@ const reducer = (state = initialState, action) => {
                 productCreateLoading: false,
                 productCreateError: action.payload,
             };
+
+        // 장바구니 등록
+        case CART_ADD_REQUEST:
+            return {
+                ...state,
+                cartAddLoading: true,
+                cartAddDone: false,
+                cartAddError: null,
+            };
+        case CART_ADD_SUCCESS:
+            return {
+                ...state,
+                cartAddlLoading: false,
+                cartAddlDone: true,
+            };
+        case CART_ADD_FAILURE:
+            return {
+                ...state,
+                cartAddLoading: false,
+                cartAddError: action.payload,
+            };
+
+        // 장바구니 리스트
+        case CART_LIST_REQUEST:
+            return {
+                ...state,
+                cartListLoading: true,
+                cartListDone: false,
+                cartListError: null,
+            };
+        case CART_LIST_SUCCESS:
+            return {
+                ...state,
+                cartListlLoading: false,
+                cartListlDone: true,
+                cartList: action.payload,
+            };
+        case CART_LIST_FAILURE:
+            return {
+                ...state,
+                cartListLoading: false,
+                cartListError: action.payload,
+            };
         default:
             return state;
     }
@@ -153,6 +211,8 @@ export const actionCreators = {
     productListRequest,
     productDetailRequest,
     productCreateRequest,
+    addToCartRequest,
+    cartListRequest,
 };
 
 export default reducer;

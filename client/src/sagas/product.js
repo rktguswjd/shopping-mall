@@ -9,6 +9,12 @@ import {
     PRODUCT_CREATE_REQUEST,
     PRODUCT_CREATE_SUCCESS,
     PRODUCT_CREATE_FAILURE,
+    CART_ADD_REQUEST,
+    CART_ADD_SUCCESS,
+    CART_ADD_FAILURE,
+    CART_LIST_REQUEST,
+    CART_LIST_SUCCESS,
+    CART_LIST_FAILURE,
 } from "../reducers/product";
 
 function productListAPI(category) {
@@ -79,7 +85,9 @@ function productDetailAPI(id) {
                 "https://image.cosstores.com/static/0/8/0/27/A1/hnm40A1270804_01_0947046_001_001_400.jpg",
             name: "텍스처드 롤 넥 베스트",
             price: "57,500원",
-            description: "기모찌입니다2",
+            description: "기모찌입니다",
+            category: "top",
+            stock: "99",
         },
         {
             id: 2,
@@ -88,6 +96,8 @@ function productDetailAPI(id) {
             name: "플리츠 에이라인 울 캐시미어 미니 스커트",
             price: "60,000원",
             description: "기모찌입니다2",
+            category: "outer",
+            stock: "17",
         },
         {
             id: 3,
@@ -96,6 +106,8 @@ function productDetailAPI(id) {
             name: "캐시미어 가디건",
             price: "145,000원",
             description: "기모찌입니다2",
+            category: "pants",
+            stock: "5",
         },
         {
             id: 4,
@@ -104,6 +116,8 @@ function productDetailAPI(id) {
             name: "와이드 레그 니티드 쇼츠",
             price: "67,500원",
             description: "기모찌입니다2",
+            category: "skirt",
+            stock: "75",
         },
     ];
 
@@ -135,11 +149,70 @@ function* productCreate(action) {
         yield put({
             type: PRODUCT_CREATE_SUCCESS,
         });
-        console.log(action);
     } catch (error) {
         yield put({
             type: PRODUCT_CREATE_FAILURE,
             /*error: err.response.data*/
+        });
+    }
+}
+
+function addToCartAPI(data) {
+    return "성공";
+}
+
+function* addToCart(action) {
+    try {
+        yield call(addToCartAPI, action.data);
+        yield put({
+            type: CART_ADD_SUCCESS,
+        });
+    } catch (error) {
+        yield put({
+            type: CART_ADD_FAILURE,
+        });
+    }
+}
+
+function cartListAPI(data) {
+    return [
+        {
+            id: 1,
+            src:
+                "https://image.cosstores.com/static/0/8/0/27/A1/hnm40A1270804_01_0947046_001_001_400.jpg",
+            name: "텍스처드 롤 넥 베스트",
+            price: 57500,
+            quantity: 1,
+        },
+        {
+            id: 2,
+            src:
+                "https://image.cosstores.com/static/5/3/4/24/A1/hnm40A1244356_01_0930726_004_001_400.jpg",
+            name: "플리츠 에이라인 울 캐시미어 미니 스커트",
+            price: 60000,
+            quantity: 2,
+        },
+        {
+            id: 3,
+            src:
+                "https://image.cosstores.com/static/5/2/7/20/A1/hnm40A1207257_01_0934476_001_001_400.jpg",
+            name: "캐시미어 가디건",
+            price: 145000,
+            quantity: 1,
+        },
+    ];
+}
+
+function* cartList() {
+    try {
+        const result = yield call(cartListAPI);
+        yield put({
+            type: CART_LIST_SUCCESS,
+            payload: result,
+        });
+    } catch (error) {
+        yield put({
+            type: CART_LIST_FAILURE,
         });
     }
 }
@@ -156,10 +229,20 @@ function* watchProductCreate() {
     yield takeLatest(PRODUCT_CREATE_REQUEST, productCreate);
 }
 
+function* watchAddToCart() {
+    yield takeLatest(CART_ADD_REQUEST, addToCart);
+}
+
+function* watchCartList() {
+    yield takeLatest(CART_LIST_REQUEST, cartList);
+}
+
 export default function* productSaga() {
     yield all([
         fork(watchProductList),
         fork(watchProductDetail),
         fork(watchProductCreate),
+        fork(watchAddToCart),
+        fork(watchCartList),
     ]);
 }
