@@ -20,6 +20,8 @@ function productListAPI(category) {
             name: "텍스처드 롤 넥 베스트",
             price: "57,500원",
             description: "기모찌입니다",
+            category: "top",
+            stock: "99",
         },
         {
             id: 2,
@@ -28,6 +30,8 @@ function productListAPI(category) {
             name: "플리츠 에이라인 울 캐시미어 미니 스커트",
             price: "60,000원",
             description: "기모찌입니다2",
+            category: "outer",
+            stock: "17",
         },
         {
             id: 3,
@@ -36,6 +40,8 @@ function productListAPI(category) {
             name: "캐시미어 가디건",
             price: "145,000원",
             description: "기모찌입니다2",
+            category: "pants",
+            stock: "5",
         },
         {
             id: 4,
@@ -44,6 +50,8 @@ function productListAPI(category) {
             name: "와이드 레그 니티드 쇼츠",
             price: "67,500원",
             description: "기모찌입니다2",
+            category: "skirt",
+            stock: "75",
         },
     ];
 }

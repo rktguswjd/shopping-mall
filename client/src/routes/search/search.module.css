@@ -1,5 +1,4 @@
 .page_name {
-    font-family: "Spectral", serif;
     color: black;
     margin-bottom: 1rem;
 }
@@ -20,7 +19,6 @@
 }
 
 .btn {
-    font-family: "Spectral", serif;
     width: 70px;
     height: 35px;
     color: #2c2c2c;
