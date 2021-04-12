@@ -7,8 +7,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Getter @Setter
@@ -17,6 +19,7 @@ import java.util.Collections;
 @AllArgsConstructor
 @Table(name = "members")
 public class Member implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,6 +31,9 @@ public class Member implements UserDetails {
     
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    List<Product> myProducts = new ArrayList<>();
 
     public enum Role{
         ROLE_CLIENT, ROLE_ADMIN, DELETED

@@ -19,6 +19,10 @@ public class Product {
     String description;
     int price;
     int stock;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Member admin;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Category category;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
