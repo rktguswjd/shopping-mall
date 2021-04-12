@@ -1,6 +1,6 @@
 package com.project.shoppingmall.domain;
 
-import com.project.shoppingmall.controller.requestdto.RequestMemberSignUpDto;
+import com.project.shoppingmall.controller.requestdto.member.RequestMemberSignUpDto;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

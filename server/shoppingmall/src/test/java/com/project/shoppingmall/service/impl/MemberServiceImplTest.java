@@ -1,6 +1,6 @@
 package com.project.shoppingmall.service.impl;
 
-import com.project.shoppingmall.controller.requestdto.RequestMemberSignUpDto;
+import com.project.shoppingmall.controller.requestdto.member.RequestMemberSignUpDto;
 import com.project.shoppingmall.exception.DuplicationEmailException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

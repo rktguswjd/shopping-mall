@@ -1,22 +1,18 @@
 package com.project.shoppingmall.controller;
 
-import com.project.shoppingmall.controller.requestdto.RequestMemberSignInDto;
-import com.project.shoppingmall.controller.requestdto.RequestMemberSignUpDto;
-import com.project.shoppingmall.controller.responsedto.ResponseMyInfo;
+import com.project.shoppingmall.controller.requestdto.member.RequestMemberSignInDto;
+import com.project.shoppingmall.controller.requestdto.member.RequestMemberSignUpDto;
 import com.project.shoppingmall.controller.responsedto.ResponseSignIn;
 import com.project.shoppingmall.domain.Member;
 import com.project.shoppingmall.security.JwtTokenProvider;
 import com.project.shoppingmall.service.MemberService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package com.project.shoppingmall.service;
 
-import com.project.shoppingmall.controller.requestdto.RequestMemberSignUpDto;
+import com.project.shoppingmall.controller.requestdto.member.RequestMemberSignUpDto;
 import com.project.shoppingmall.domain.Member;
 
 import java.util.Optional;
