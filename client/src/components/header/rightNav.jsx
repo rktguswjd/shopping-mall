@@ -3,6 +3,8 @@ import React, { useCallback, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutRequestAction } from "../../reducers/user";
+import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Ul = styled.ul`
     list-style: none;
@@ -46,17 +48,20 @@ const Ul = styled.ul`
         cursor: pointer;
     }
 
-    .dropdown_content_item_clicked {
+    .dropdown_content_item_open {
         display: flex;
         align-items: center;
         padding: 0;
     }
 
-    .dropdown_content_item_clicked ul {
-        display: block;
+    .dropdown_content_item_open ul {
         position: relative;
-        flex-direction: column;
-        display: inline-block;
+        list-style: none;
+    }
+
+    .dropdown_content_item_close {
+        display: none;
+        list-style: none;
     }
 
     @media (max-width: 768px) {
@@ -84,9 +89,6 @@ const Ul = styled.ul`
             box-shadow: none;
             text-align: left;
         }
-
-        .sub_li {
-        }
     }
 `;
 
@@ -103,7 +105,7 @@ const RightNav = ({ open }) => {
     return (
         <Ul open={open}>
             <li className="nav_menu_item">
-                <Link to="/shop/search"> 검색</Link>
+                <Link to="/shop/search">검색</Link>
             </li>
             <li className="nav_menu_item">
                 <Link to="/shop">SHOP</Link>
@@ -114,7 +116,9 @@ const RightNav = ({ open }) => {
 
             {userInfo ? (
                 <li className="dropdown">
-                    {userInfo.name} ▼
+                    {userInfo.name}
+
+                    <FontAwesomeIcon icon={faAngleDown} />
                     <div className="dropdown_content">
                         <div className="dropdown_content_item">
                             <Link to="/profile">프로필</Link>
@@ -150,8 +154,8 @@ const RightNav = ({ open }) => {
                             <ul
                                 className={
                                     adminProductOpen
-                                        ? "dropdown_content_item_clicked"
-                                        : "dropdown_content_item"
+                                        ? "dropdown_content_item_open"
+                                        : "dropdown_content_item_close"
                                 }
                             >
                                 <li className="sub_li">
@@ -174,8 +178,8 @@ const RightNav = ({ open }) => {
                             <ul
                                 className={
                                     adminMemberOpen
-                                        ? "dropdown_content_item_clicked"
-                                        : "dropdown_content_item"
+                                        ? "dropdown_content_item_open"
+                                        : "dropdown_content_item_close"
                                 }
                             >
                                 <li>회원목록</li>
@@ -189,8 +193,8 @@ const RightNav = ({ open }) => {
                             <ul
                                 className={
                                     adminOderOpen
-                                        ? "dropdown_content_item_clicked"
-                                        : "dropdown_content_item"
+                                        ? "dropdown_content_item_open"
+                                        : "dropdown_content_item_close"
                                 }
                             >
                                 <li>주문목록</li>
