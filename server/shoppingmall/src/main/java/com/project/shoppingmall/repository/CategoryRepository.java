@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<Category,Integer> {
     int countByName(String name);
+
+    Optional<Category> findByName(String name);
 }
