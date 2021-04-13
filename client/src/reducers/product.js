@@ -26,6 +26,11 @@ export const initialState = {
     productCreateLoading: false, // 관리자 상품 등록
     productCreateDone: false,
     productCreateError: null,
+
+    categoryList: null, // 카테고리 정보
+    categoryCreateLoading: false, // 관리자 카테고리 등록
+    categoryCreateDone: false,
+    categoryCreateError: null,
 };
 
 export const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
@@ -55,6 +60,10 @@ export const CART_REMOVE_FAILURE = "CART_REMOVE_FAILURE";
 export const PRODUCT_CREATE_REQUEST = "PRODUCT_CREATE_REQUEST";
 export const PRODUCT_CREATE_SUCCESS = "PRODUCT_CREATE_SUCCESS";
 export const PRODUCT_CREATE_FAILURE = "PRODUCT_CREATE_FAILURE";
+
+export const CATEGORY_CREATE_REQUEST = "CATEGORY_CREATE_REQUEST";
+export const CATEGORY_CREATE_SUCCESS = "CATEGORY_CREATE_SUCCESS";
+export const CATEGORY_CREATE_FAILURE = "CATEGORY_CREATE_FAILURE";
 
 export const productListRequest = (category = "", keyword = "") => {
     const data = { category, keyword };
@@ -89,6 +98,20 @@ export const productCreateRequest = (data) => {
     return {
         type: PRODUCT_CREATE_REQUEST,
         data,
+    };
+};
+
+export const removeFromCartRequest = (id) => {
+    return {
+        type: CART_REMOVE_REQUEST,
+        id,
+    };
+};
+
+export const categoryCreateRequest = (category) => {
+    return {
+        type: CATEGORY_CREATE_REQUEST,
+        category,
     };
 };
 
@@ -202,6 +225,51 @@ const reducer = (state = initialState, action) => {
                 cartListLoading: false,
                 cartListError: action.payload,
             };
+
+        // 장바구니 삭제
+        case CART_REMOVE_REQUEST:
+            return {
+                ...state,
+                cartRemoveLoading: true,
+                cartRemoveDone: false,
+                cartRemoveError: null,
+            };
+
+        case CART_REMOVE_SUCCESS:
+            return {
+                ...state,
+                cartRemoveLoading: false,
+                cartRemoveDone: true,
+                cartList: action.payload,
+            };
+        case CART_REMOVE_FAILURE:
+            return {
+                ...state,
+                cartRemoveLoading: false,
+                cartRemoveError: action.payload,
+            };
+
+        // 카테고리 등록
+        case CATEGORY_CREATE_REQUEST:
+            return {
+                ...state,
+                categoryCreateLoading: true,
+                categoryCreateDone: false,
+                categoryCreateError: null,
+            };
+        case CATEGORY_CREATE_SUCCESS:
+            return {
+                ...state,
+                categoryCreateLoading: false,
+                categoryCreateDone: true,
+            };
+        case CATEGORY_CREATE_FAILURE:
+            return {
+                ...state,
+                categoryCreateLoading: false,
+                categoryCreateError: action.payload,
+            };
+
         default:
             return state;
     }
@@ -213,6 +281,8 @@ export const actionCreators = {
     productCreateRequest,
     addToCartRequest,
     cartListRequest,
+    removeFromCartRequest,
+    categoryCreateRequest,
 };
 
 export default reducer;

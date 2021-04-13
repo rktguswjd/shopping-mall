@@ -21,15 +21,15 @@ const ProductCreate = ({ history }) => {
 
     const onChangeCategory = useCallback((e) => {
         setCategory(e.target.value);
-    });
+    }, []);
 
     const onChangeStock = useCallback((e) => {
         setStock(e.target.value);
-    });
+    }, []);
 
     const onChangePrice = useCallback((e) => {
         setPrice(e.target.value);
-    });
+    }, []);
 
     const onChangePhoto = useCallback((e) => {
         e.preventDefault();
@@ -40,11 +40,12 @@ const ProductCreate = ({ history }) => {
             setPreview(reader.result);
         };
         reader.readAsDataURL(file);
-    });
+    }, []);
 
     const onChagneDiscription = useCallback((e) => {
+        console.log(e.target.value);
         setDiscription(e.target.value);
-    });
+    }, []);
 
     const onSubmit = useCallback((e) => {
         e.preventDefault();
@@ -58,8 +59,9 @@ const ProductCreate = ({ history }) => {
                 discription,
             })
         );
-        history.replace("/admin/productlist");
-    });
+        console.log(name, category, stock, price, photo, discription);
+        // history.replace("/admin/productlist");
+    }, []);
 
     useEffect(() => {
         if (!userInfo) {
@@ -77,87 +79,89 @@ const ProductCreate = ({ history }) => {
             <div className={styled.page_name}>PRODUCT REGISTER</div>
             <form className={styled.form} onSubmit={onSubmit}>
                 <table className={styled.table}>
-                    <tr>
-                        <th>상품명</th>
-                        <td>
-                            <input
-                                type="text"
-                                className={styled.input_text}
-                                onChange={onChangeName}
-                                required
-                            />
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>카테고리</th>
-                        <td>
-                            <select
-                                value={category}
-                                onChange={onChangeCategory}
-                                required
-                            >
-                                <option value="outer">OUTER</option>
-                                <option value="top">TOP</option>
-                                <option value="pants">PANTS</option>
-                                <option value="skirt">SKIRT</option>
-                            </select>
-                        </td>
-                    </tr>
+                    <tbody>
+                        <tr>
+                            <th>상품명</th>
+                            <td>
+                                <input
+                                    type="text"
+                                    className={styled.input_text}
+                                    onChange={onChangeName}
+                                    required
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>카테고리</th>
+                            <td>
+                                <select
+                                    value={category}
+                                    onChange={onChangeCategory}
+                                    required
+                                >
+                                    <option value="outer">OUTER</option>
+                                    <option value="top">TOP</option>
+                                    <option value="pants">PANTS</option>
+                                    <option value="skirt">SKIRT</option>
+                                </select>
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>재고수량</th>
-                        <td>
-                            <input
-                                type="number"
-                                className={styled.input_number}
-                                onChange={onChangeStock}
-                                required
-                            />
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>재고수량</th>
+                            <td>
+                                <input
+                                    type="number"
+                                    className={styled.input_number}
+                                    onChange={onChangeStock}
+                                    required
+                                />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>가격</th>
-                        <td>
-                            <input
-                                type="number"
-                                className={styled.input_number}
-                                onChange={onChangePrice}
-                                required
-                            />
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>가격</th>
+                            <td>
+                                <input
+                                    type="number"
+                                    className={styled.input_number}
+                                    onChange={onChangePrice}
+                                    required
+                                />
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>상품사진</th>
-                        <td>
-                            <input
-                                type="file"
-                                accept="image/jpg,impge/png,image/jpeg,image/gif"
-                                onChange={onChangePhoto}
-                                required
-                            />
-                            {photo && (
-                                <div className={styled.preview_content}>
-                                    <img
-                                        className={styled.preview}
-                                        src={preview}
-                                    />
-                                </div>
-                            )}
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>상품사진</th>
+                            <td>
+                                <input
+                                    type="file"
+                                    accept="image/jpg,impge/png,image/jpeg,image/gif"
+                                    onChange={onChangePhoto}
+                                    required
+                                />
+                                {photo && (
+                                    <div className={styled.preview_content}>
+                                        <img
+                                            className={styled.preview}
+                                            src={preview}
+                                        />
+                                    </div>
+                                )}
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <th>제품설명</th>
-                        <td>
-                            <textarea
-                                className={styled.textarea_description}
-                                onChange={onChagneDiscription}
-                                required
-                            />
-                        </td>
-                    </tr>
+                        <tr>
+                            <th>제품설명</th>
+                            <td>
+                                <textarea
+                                    className={styled.textarea_description}
+                                    onChange={onChagneDiscription}
+                                    required
+                                />
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
                 <button className={styled.btn}>CREATE</button>
             </form>

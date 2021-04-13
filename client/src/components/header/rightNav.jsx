@@ -168,6 +168,11 @@ const RightNav = ({ open }) => {
                                         상품등록
                                     </Link>
                                 </li>
+                                <li className="sub_li">
+                                    <Link to="/admin/category/create">
+                                        카테고리등록
+                                    </Link>
+                                </li>
                             </ul>
                         </div>
                         <div

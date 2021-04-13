@@ -13,6 +13,7 @@ import LogIn from "../../routes/login/Login";
 import ProductList from "../../routes/productList/productList";
 import ProductCreate from "../../routes/productCreate/productCreate";
 import Header from "../header/header";
+import CategoryCreate from "../../routes/categoryCreate/CategoryCreate";
 
 const App = () => {
     return (
@@ -24,6 +25,7 @@ const App = () => {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/shop" component={Shop} />
                         <Route exact path="/shop/search" component={Search} />
+
                         <Route exact path="/cart" component={Cart} />
                         <Route exact path="/login" component={LogIn} />
 
@@ -57,6 +59,11 @@ const App = () => {
                             exact
                             path="/admin/product/create"
                             component={ProductCreate}
+                        />
+                        <Route
+                            exact
+                            path="/admin/category/create"
+                            component={CategoryCreate}
                         />
                     </main>
 
