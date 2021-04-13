@@ -1,3 +1,6 @@
+.page_box {
+    margin-bottom: 2.5rem;
+}
 .page_name {
     color: black;
     margin-bottom: 1rem;
@@ -31,32 +34,6 @@
     padding: 10px;
     outline: none;
     border: 1px solid #b2b2b2;
-}
-.input_number {
-    height: 30px;
-    width: 150px;
-    padding: 10px;
-    outline: none;
-    border: 1px solid #b2b2b2;
-}
-
-.textarea_description {
-    height: 100px;
-    width: 600px;
-    padding: 10px;
-    outline: none;
-    border: 1px solid #b2b2b2;
-}
-
-.preview_content {
-    margin-top: 0.8rem;
-    width: 400px;
-    height: auto;
-}
-
-.preview {
-    max-width: 100%;
-    height: auto;
 }
 
 .btn {
