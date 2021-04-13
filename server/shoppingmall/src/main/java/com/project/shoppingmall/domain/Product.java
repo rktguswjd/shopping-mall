@@ -1,7 +1,7 @@
 package com.project.shoppingmall.domain;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.project.shoppingmall.controller.requestdto.product.RequestProductEnrollInfo;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,23 +10,36 @@ import java.util.List;
 @Entity
 @Table(name = "products")
 @Getter
-@Setter
+@Builder @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    String description;
-    int price;
-    int stock;
+    private Long id;
+    private String name;
+    private String description;
+    private int price;
+    private int stock;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Member admin;
+    private Member admin;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Category category;
+    private Category category;
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    List<File> imageFiles = new ArrayList<>();
+    private List<File> imageFiles = new ArrayList<>();
 
+    //상품 등록 메서드
+    public Product enrollProduct(RequestProductEnrollInfo enrollInfo,Member admin,Category category) {
+        return Product.builder()
+                .name(enrollInfo.getName())
+                .description(enrollInfo.getDescription())
+                .price(enrollInfo.getPrice())
+                .stock(enrollInfo.getStock())
+                .category(category)
+                .admin(admin)
+                .build();
+    }
 
 }

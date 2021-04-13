@@ -9,15 +9,15 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "files")
-@Getter @Setter
+@Getter
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    int size;
-    String fileOriginalName;
-    String filePath;
+    private Long id;
+    private int size;
+    private String fileOriginalName;
+    private String filePath;
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "item_id")
-    Product product;
+    private Product product;
 }

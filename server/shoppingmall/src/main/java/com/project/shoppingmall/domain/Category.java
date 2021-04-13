@@ -12,19 +12,18 @@ import java.util.List;
 
 @Entity
 @Table(name = "categories")
-@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Category {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String name;
+    private int id;
+    private String name;
     @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     // 생성 메서드
     public static Category enrollCategory(RequestCategoryEnrollInfo categoryEnrollInfo){
         Category category = new Category();
-        category.setName(categoryEnrollInfo.getName());
+        category.name = categoryEnrollInfo.getName();
         return category;
     }
 
