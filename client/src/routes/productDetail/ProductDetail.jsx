@@ -16,8 +16,7 @@ const ProductDetail = ({ match, history }) => {
     }, [id]);
 
     const onClickAddToCart = useCallback(() => {
-        dispatch(addToCartRequest(id, quantity));
-        history.push("/cart");
+        history.push(`/cart/${id}?quantity=${quantity}`);
     }, []);
 
     return (

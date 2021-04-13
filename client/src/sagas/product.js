@@ -1,4 +1,5 @@
 import { all, fork, put, takeLatest, call } from "redux-saga/effects";
+import axios from "axios";
 import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
@@ -12,9 +13,15 @@ import {
     CART_ADD_REQUEST,
     CART_ADD_SUCCESS,
     CART_ADD_FAILURE,
+    CART_REMOVE_REQUEST,
+    CART_REMOVE_SUCCESS,
+    CART_REMOVE_FAILURE,
     CART_LIST_REQUEST,
     CART_LIST_SUCCESS,
     CART_LIST_FAILURE,
+    CATEGORY_CREATE_REQUEST,
+    CATEGORY_CREATE_SUCCESS,
+    CATEGORY_CREATE_FAILURE,
 } from "../reducers/product";
 
 function productListAPI(category) {
@@ -140,6 +147,7 @@ function* productDetail(action) {
 }
 
 function productCreateAPI(data) {
+    console.log(data);
     return "서공";
 }
 
@@ -170,6 +178,50 @@ function* addToCart(action) {
     } catch (error) {
         yield put({
             type: CART_ADD_FAILURE,
+        });
+    }
+}
+
+function removeFromCartAPI(id) {
+    const list = [
+        {
+            id: 1,
+            src:
+                "https://image.cosstores.com/static/0/8/0/27/A1/hnm40A1270804_01_0947046_001_001_400.jpg",
+            name: "텍스처드 롤 넥 베스트",
+            price: 57500,
+            quantity: 1,
+        },
+        {
+            id: 2,
+            src:
+                "https://image.cosstores.com/static/5/3/4/24/A1/hnm40A1244356_01_0930726_004_001_400.jpg",
+            name: "플리츠 에이라인 울 캐시미어 미니 스커트",
+            price: 60000,
+            quantity: 2,
+        },
+        {
+            id: 3,
+            src:
+                "https://image.cosstores.com/static/5/2/7/20/A1/hnm40A1207257_01_0934476_001_001_400.jpg",
+            name: "캐시미어 가디건",
+            price: 145000,
+            quantity: 1,
+        },
+    ];
+    return list.filter((e) => e.id !== Number(id));
+}
+
+function* removeFromCart(action) {
+    try {
+        const result = yield call(removeFromCartAPI, action.id);
+        yield put({
+            type: CART_REMOVE_SUCCESS,
+            payload: result,
+        });
+    } catch (error) {
+        yield put({
+            type: CART_REMOVE_FAILURE,
         });
     }
 }
@@ -217,6 +269,24 @@ function* cartList() {
     }
 }
 
+function categoryCreateAPI(category) {
+    // return axios.post("/member/signUp", category);
+}
+
+function* categoryCreate(action) {
+    try {
+        yield call(categoryCreateAPI, action.category);
+        yield put({
+            type: CATEGORY_CREATE_SUCCESS,
+        });
+    } catch (error) {
+        yield put({
+            type: CATEGORY_CREATE_FAILURE,
+            /*error: err.response.data*/
+        });
+    }
+}
+
 function* watchProductList() {
     yield takeLatest(PRODUCT_LIST_REQUEST, productList);
 }
@@ -237,12 +307,22 @@ function* watchCartList() {
     yield takeLatest(CART_LIST_REQUEST, cartList);
 }
 
+function* watchRemoveFromCart() {
+    yield takeLatest(CART_REMOVE_REQUEST, removeFromCart);
+}
+
+function* watchCategoryCreate() {
+    yield takeLatest(CATEGORY_CREATE_REQUEST, categoryCreate);
+}
+
 export default function* productSaga() {
     yield all([
         fork(watchProductList),
         fork(watchProductDetail),
         fork(watchProductCreate),
         fork(watchAddToCart),
+        fork(watchRemoveFromCart),
         fork(watchCartList),
+        fork(watchCategoryCreate),
     ]);
 }

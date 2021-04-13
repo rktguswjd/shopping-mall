@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import RightNav from "./rightNav";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import NavBox from "./navBox";
 
 const StyledBurger = styled.div`
     position: absolute;
@@ -41,7 +41,7 @@ const Burger = () => {
                     <FontAwesomeIcon icon={faBars} />
                 )}
             </StyledBurger>
-            <RightNav open={open} />
+            <NavBox open={open} />
         </>
     );
 };
