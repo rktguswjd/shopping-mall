@@ -22,6 +22,12 @@ import {
     CATEGORY_CREATE_REQUEST,
     CATEGORY_CREATE_SUCCESS,
     CATEGORY_CREATE_FAILURE,
+    CATEGORY_LIST_REQUEST,
+    CATEGORY_LIST_SUCCESS,
+    CATEGORY_LIST_FAILURE,
+    PAYMENT_PRODUCTS_REQUEST,
+    PAYMENT_PRODUCTS_SUCCESS,
+    PAYMENT_PRODUCTS_FAILURE,
 } from "../reducers/product";
 
 function productListAPI(category) {
@@ -116,6 +122,7 @@ function productDetailAPI(id) {
             category: "pants",
             stock: "5",
         },
+
         {
             id: 4,
             src:
@@ -148,7 +155,7 @@ function* productDetail(action) {
 
 function productCreateAPI(data) {
     console.log(data);
-    return "서공";
+    return "성공";
 }
 
 function* productCreate(action) {
@@ -226,7 +233,7 @@ function* removeFromCart(action) {
     }
 }
 
-function cartListAPI(data) {
+function cartListAPI() {
     return [
         {
             id: 1,
@@ -235,6 +242,9 @@ function cartListAPI(data) {
             name: "텍스처드 롤 넥 베스트",
             price: 57500,
             quantity: 1,
+            description: "기모찌입니다",
+            category: "top",
+            stock: 99,
         },
         {
             id: 2,
@@ -243,6 +253,9 @@ function cartListAPI(data) {
             name: "플리츠 에이라인 울 캐시미어 미니 스커트",
             price: 60000,
             quantity: 2,
+            description: "기모찌입니다",
+            category: "outer",
+            stock: 99,
         },
         {
             id: 3,
@@ -251,6 +264,9 @@ function cartListAPI(data) {
             name: "캐시미어 가디건",
             price: 145000,
             quantity: 1,
+            description: "기모찌입니다",
+            category: "top",
+            stock: 99,
         },
     ];
 }
@@ -287,6 +303,50 @@ function* categoryCreate(action) {
     }
 }
 
+function categoryListAPI(category) {
+    return [
+        { id: 1, name: "OUTER" },
+        { id: 2, name: "TOP" },
+        { id: 3, name: "PANTS" },
+        { id: 4, name: "SKIRT" },
+    ];
+}
+
+function* categoryList(action) {
+    try {
+        const result = yield call(categoryListAPI);
+        yield put({
+            type: CATEGORY_LIST_SUCCESS,
+            payload: result,
+        });
+    } catch (error) {
+        yield put({
+            type: CATEGORY_LIST_FAILURE,
+            /*error: err.response.data*/
+        });
+    }
+}
+
+function paymentProductsAPI(products) {
+    return products;
+}
+
+function* paymentProducts(action) {
+    try {
+        const result = yield call(paymentProductsAPI, action.products);
+
+        yield put({
+            type: PAYMENT_PRODUCTS_SUCCESS,
+            payload: result,
+        });
+    } catch (error) {
+        yield put({
+            type: PAYMENT_PRODUCTS_FAILURE,
+            /*error: err.response.data*/
+        });
+    }
+}
+
 function* watchProductList() {
     yield takeLatest(PRODUCT_LIST_REQUEST, productList);
 }
@@ -315,6 +375,14 @@ function* watchCategoryCreate() {
     yield takeLatest(CATEGORY_CREATE_REQUEST, categoryCreate);
 }
 
+function* watchCategoryList() {
+    yield takeLatest(CATEGORY_LIST_REQUEST, categoryList);
+}
+
+function* watchPaymentProducts() {
+    yield takeLatest(PAYMENT_PRODUCTS_REQUEST, paymentProducts);
+}
+
 export default function* productSaga() {
     yield all([
         fork(watchProductList),
@@ -324,5 +392,7 @@ export default function* productSaga() {
         fork(watchRemoveFromCart),
         fork(watchCartList),
         fork(watchCategoryCreate),
+        fork(watchCategoryList),
+        fork(watchPaymentProducts),
     ]);
 }

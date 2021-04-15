@@ -28,6 +28,11 @@
     align-items: center;
 }
 
+.payment_products * {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
 .payment_product_img {
     max-width: 100px;
     flex-grow: 1;
@@ -36,14 +41,23 @@
 .payment_product_name {
     flex-grow: 2;
 }
-.payment_adress {
-    align-items: center;
+
+.payment_adress_table td {
+    padding: 0.5rem;
+    text-align: left;
 }
 
-.payment_adress_input {
-    display: flex;
+.payment_adress_table th {
+    padding: 0.5rem;
 }
 
+.payment_adress_table input {
+    height: 30px;
+    width: 300px;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #b2b2b2;
+}
 .payment_btn {
     font-family: "Spectral", serif;
     width: 280px;
@@ -63,4 +77,29 @@
     background: black;
     color: #fff;
     border: 1px solid black;
+}
+
+@media screen and (max-width: 768px) {
+    .payment_container_content {
+        text-align: center;
+    }
+
+    .payment_products {
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    .payment_btn {
+        font-size: 0.4rem;
+        margin: 10px 0;
+    }
+    .payment_total {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .payment_adress_table {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
