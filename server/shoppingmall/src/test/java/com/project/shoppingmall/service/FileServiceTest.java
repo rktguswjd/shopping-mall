@@ -22,4 +22,9 @@ class FileServiceTest {
         System.out.println(file2.getAbsolutePath());
         //file1은 classpath 상대경로를 가리킨다.
     }
+    @Test
+    void 디렉터리_생성() {
+        File file = new File(filePath + "images/"+2021);
+        if(!file.exists()) file.mkdirs();
+    }
 }
