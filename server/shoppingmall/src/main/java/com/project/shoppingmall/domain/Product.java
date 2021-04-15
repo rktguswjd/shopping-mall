@@ -21,17 +21,17 @@ public class Product {
     private int price;
     private int stock;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Member admin;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<File> imageFiles = new ArrayList<>();
 
     //상품 등록 메서드
-    public Product enrollProduct(RequestProductEnrollInfo enrollInfo,Member admin,Category category) {
+    public static Product enrollProduct(RequestProductEnrollInfo enrollInfo,Member admin,Category category) {
         return Product.builder()
                 .name(enrollInfo.getName())
                 .description(enrollInfo.getDescription())
