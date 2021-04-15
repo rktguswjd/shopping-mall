@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Ul = styled.ul`
     list-style: none;
+    margin-bottom: 0;
     z-index: 2;
     display: flex;
     flex-flow: row nowrap;
@@ -105,19 +106,18 @@ const RightNav = ({ open }) => {
     return (
         <Ul open={open}>
             <li className="nav_menu_item">
-                <Link to="/shop/search">검색</Link>
+                <Link to="/shop/search">SEARCH</Link>
             </li>
             <li className="nav_menu_item">
                 <Link to="/shop">SHOP</Link>
             </li>
             <li className="nav_menu_item">
-                <Link to="/cart"> 장바구니</Link>
+                <Link to="/cart">CART</Link>
             </li>
 
             {userInfo ? (
                 <li className="dropdown">
-                    {userInfo.name}
-
+                    MYPAGE
                     <FontAwesomeIcon icon={faAngleDown} />
                     <div className="dropdown_content">
                         <div className="dropdown_content_item">
@@ -136,13 +136,13 @@ const RightNav = ({ open }) => {
                 </li>
             ) : (
                 <li className="nav_menu_item">
-                    <Link to="/login">로그인</Link>
+                    <Link to="/login">LOGIN</Link>
                 </li>
             )}
 
             {userInfo && userInfo.isAdmin && (
                 <li className="dropdown">
-                    관리자
+                    ADMIN
                     <div className="dropdown_content">
                         <div
                             className="dropdown_content_item"

@@ -43,25 +43,27 @@ const ProductCreate = ({ history }) => {
     }, []);
 
     const onChagneDiscription = useCallback((e) => {
-        console.log(e.target.value);
         setDiscription(e.target.value);
     }, []);
 
-    const onSubmit = useCallback((e) => {
-        e.preventDefault();
-        dispatch(
-            productCreateRequest({
-                name,
-                category,
-                stock,
-                price,
-                photo,
-                discription,
-            })
-        );
-        console.log(name, category, stock, price, photo, discription);
-        // history.replace("/admin/productlist");
-    }, []);
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            dispatch(
+                productCreateRequest(
+                    name,
+                    category,
+                    stock,
+                    price,
+                    photo,
+                    discription
+                )
+            );
+
+            history.replace("/admin/productlist");
+        },
+        [name, category, stock, price, photo, discription]
+    );
 
     useEffect(() => {
         if (!userInfo) {
