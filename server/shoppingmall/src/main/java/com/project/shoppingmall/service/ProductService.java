@@ -4,9 +4,10 @@ import com.project.shoppingmall.controller.requestdto.product.RequestProductEnro
 import com.project.shoppingmall.domain.Member;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
-public interface ProductService {
-    void enrollProduct(RequestProductEnrollInfo enrollInfo, Member admin, List<MultipartFile> files);
+public interface ProductService extends FileService{
+    void enrollProduct(RequestProductEnrollInfo enrollInfo, Member admin, List<MultipartFile> files) throws IOException;
 
 }
