@@ -75,7 +75,15 @@ function* logOut() {
 }
 
 function loadUserAPI(data) {
-    return { name: "현정", isAdmin: true };
+    return {
+        name: "현정",
+        email: "9999@naver.com",
+        isAdmin: true,
+        phone: "01012341234",
+        zipCode: "16213",
+        address: "경기 수원시 장안구 가정빌라",
+        detailAddress: "201호",
+    };
 }
 
 function* loadUser(action) {

@@ -1,9 +1,13 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "./cart.module.css";
-import { cartListRequest, removeFromCartRequest } from "../../reducers/product";
+import {
+    cartListRequest,
+    removeFromCartRequest,
+    paymentProductsRequest,
+} from "../../reducers/product";
 
-const Cart = () => {
+const Cart = ({ history }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,6 +19,11 @@ const Cart = () => {
     const onClickRemoveFromCart = useCallback((id) => {
         dispatch(removeFromCartRequest(id));
     }, []);
+
+    const onClickPaymentProducts = useCallback(() => {
+        dispatch(paymentProductsRequest(cartList));
+        history.push("/payment");
+    });
 
     return (
         <>
@@ -83,7 +92,10 @@ const Cart = () => {
                             원
                         </div>
                         <div>
-                            <button className={styled.payment_btn}>
+                            <button
+                                className={styled.payment_btn}
+                                onClick={onClickPaymentProducts}
+                            >
                                 PAYMENT
                             </button>
                         </div>

@@ -2,22 +2,31 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "./productDetail.module.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { productDetailRequest, addToCartRequest } from "../../reducers/product";
+import {
+    productDetailRequest,
+    addToCartRequest,
+    paymentProductsRequest,
+} from "../../reducers/product";
 
 const ProductDetail = ({ match, history }) => {
     const [quantity, setQuantity] = useState(1);
     const dispatch = useDispatch();
     const id = match.params.id;
-    const products = useSelector((state) => state.product);
-    const { productInfo } = products;
-    //id는 잘되는데 밑에 프로덕트 디테일 리케스트 함수로 아이디까진 잘갈꺼야
+    const { productInfo } = useSelector((state) => state.product);
+
     useEffect(() => {
         dispatch(productDetailRequest(id));
     }, [id]);
 
     const onClickAddToCart = useCallback(() => {
-        history.push(`/cart/${id}?quantity=${quantity}`);
+        dispatch(addToCartRequest(id, quantity));
+        history.push("/cart");
     }, []);
+
+    const onClickPaymentProducts = useCallback(() => {
+        dispatch(paymentProductsRequest([productInfo]));
+        history.push("/payment");
+    });
 
     return (
         <>
@@ -58,9 +67,13 @@ const ProductDetail = ({ match, history }) => {
                             >
                                 ADD TO CART
                             </button>
-                            <Link to="/payment">
-                                <button className={styled.btn}>BUY NOW</button>
-                            </Link>
+
+                            <button
+                                className={styled.btn}
+                                onClick={onClickPaymentProducts}
+                            >
+                                BUY NOW
+                            </button>
                         </div>
                     </div>
                     <div className={styled.productDescription}>

@@ -28,9 +28,18 @@ export const initialState = {
     productCreateError: null,
 
     categoryList: null, // 카테고리 정보
+    categoryListLoading: false, // 카테고리 리스트 가져오기 시도중
+    categoryListDone: false,
+    categoryListError: null,
+
     categoryCreateLoading: false, // 관리자 카테고리 등록
     categoryCreateDone: false,
     categoryCreateError: null,
+
+    paymentProducts: null, // 결제상품 리스트
+    paymentProductsLoading: false, // 결제 상품 요청 시도중
+    paymentProductsDone: false,
+    paymentProductsError: null,
 };
 
 export const PRODUCT_LIST_REQUEST = "PRODUCT_LIST_REQUEST";
@@ -65,6 +74,21 @@ export const CATEGORY_CREATE_REQUEST = "CATEGORY_CREATE_REQUEST";
 export const CATEGORY_CREATE_SUCCESS = "CATEGORY_CREATE_SUCCESS";
 export const CATEGORY_CREATE_FAILURE = "CATEGORY_CREATE_FAILURE";
 
+export const CATEGORY_LIST_REQUEST = "CATEGORY_LIST_REQUEST";
+export const CATEGORY_LIST_SUCCESS = "CATEGORY_LIST_SUCCESS";
+export const CATEGORY_LIST_FAILURE = "CATEGORY_LIST_FAILURE";
+
+export const PAYMENT_PRODUCTS_REQUEST = "PAYMENT_PRODUCTS_REQUEST";
+export const PAYMENT_PRODUCTS_SUCCESS = "PAYMENT_PRODUCTS_SUCCESS";
+export const PAYMENT_PRODUCTS_FAILURE = "PAYMENT_PRODUCTS_FAILURE";
+
+export const paymentProductsRequest = (products) => {
+    return {
+        type: PAYMENT_PRODUCTS_REQUEST,
+        products,
+    };
+};
+
 export const productListRequest = (category = "", keyword = "") => {
     const data = { category, keyword };
     return {
@@ -94,7 +118,16 @@ export const cartListRequest = () => {
     };
 };
 
-export const productCreateRequest = (data) => {
+export const productCreateRequest = (
+    name,
+    category,
+    stock,
+    price,
+    photo,
+    discription
+) => {
+    const data = { name, category, stock, price, photo, discription };
+    console.log(data);
     return {
         type: PRODUCT_CREATE_REQUEST,
         data,
@@ -112,6 +145,12 @@ export const categoryCreateRequest = (category) => {
     return {
         type: CATEGORY_CREATE_REQUEST,
         category,
+    };
+};
+
+export const categoryListRequest = (category) => {
+    return {
+        type: CATEGORY_LIST_REQUEST,
     };
 };
 
@@ -270,6 +309,49 @@ const reducer = (state = initialState, action) => {
                 categoryCreateError: action.payload,
             };
 
+        // 카테고리 리스트
+        case CATEGORY_LIST_REQUEST:
+            return {
+                ...state,
+                categoryListLoading: true,
+                categoryListDone: false,
+                categoryListError: null,
+            };
+        case CATEGORY_LIST_SUCCESS:
+            return {
+                ...state,
+                categoryListlLoading: false,
+                categoryListlDone: true,
+                categoryList: action.payload,
+            };
+        case CATEGORY_LIST_FAILURE:
+            return {
+                ...state,
+                categoryListLoading: false,
+                categoryListError: action.payload,
+            };
+
+        case PAYMENT_PRODUCTS_REQUEST:
+            return {
+                ...state,
+                paymentProductsLoading: true,
+                paymentProductsDone: false,
+                paymentProductsError: null,
+            };
+        case PAYMENT_PRODUCTS_SUCCESS:
+            return {
+                ...state,
+                paymentProductslLoading: false,
+                paymentProductslDone: true,
+                paymentProducts: action.payload,
+            };
+        case PAYMENT_PRODUCTS_FAILURE:
+            return {
+                ...state,
+                paymentProductsLoading: false,
+                paymentProductsError: action.payload,
+            };
+
         default:
             return state;
     }
@@ -283,6 +365,8 @@ export const actionCreators = {
     cartListRequest,
     removeFromCartRequest,
     categoryCreateRequest,
+    categoryListRequest,
+    paymentProductsRequest,
 };
 
 export default reducer;
