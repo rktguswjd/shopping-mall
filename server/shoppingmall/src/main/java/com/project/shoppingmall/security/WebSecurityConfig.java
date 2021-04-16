@@ -6,6 +6,7 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,6 +24,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/configuration/ui",
+                "/swagger-resources/**",
+                "/configuration/security",
+                "/swagger-ui.html",
+                "/webjars/**");
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic().disable()
                 .cors().configurationSource(corsConfigurationSource())
@@ -34,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/images/**").permitAll()
                 .antMatchers("/*/signUp", "/*/signIn").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .anyRequest().hasAnyRole("CLIENT", "ADMIN")
+                .anyRequest().hasAnyRole("CLIENT")
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 .and()
